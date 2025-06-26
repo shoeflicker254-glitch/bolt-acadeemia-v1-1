@@ -126,12 +126,12 @@ const About: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold mb-3">Global Presence</h3>
               <p className="text-gray-600 mb-4">
-                Operating in over 30 countries across 6 continents, serving diverse educational systems and cultures.
+                Operating in over 15 countries across 6 continents, serving diverse educational systems and cultures.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-center text-gray-700">
                   <Check size={16} className="text-blue-600 mr-2" />
-                  500+ Educational Institutions
+                  300+ Educational Institutions
                 </li>
                 <li className="flex items-center text-gray-700">
                   <Check size={16} className="text-blue-600 mr-2" />
@@ -139,7 +139,7 @@ const About: React.FC = () => {
                 </li>
                 <li className="flex items-center text-gray-700">
                   <Check size={16} className="text-blue-600 mr-2" />
-                  30+ Countries Served
+                  15+ Countries Served
                 </li>
               </ul>
             </div>
@@ -163,7 +163,7 @@ const About: React.FC = () => {
                 </li>
                 <li className="flex items-center text-gray-700">
                   <Check size={16} className="text-green-600 mr-2" />
-                  UNESCO ICT Partner
+                  UNESCO Education Partner
                 </li>
               </ul>
             </div>
@@ -183,7 +183,7 @@ const About: React.FC = () => {
                 </li>
                 <li className="flex items-center text-gray-700">
                   <Check size={16} className="text-purple-600 mr-2" />
-                  Blockchain Certificates
+                  Simplified Management
                 </li>
                 <li className="flex items-center text-gray-700">
                   <Check size={16} className="text-purple-600 mr-2" />
@@ -244,8 +244,8 @@ const About: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
-              { number: "500+", label: "Educational Institutions" },
-              { number: "30+", label: "Countries" },
+              { number: "300+", label: "Educational Institutions" },
+              { number: "15+", label: "Countries" },
               { number: "2M+", label: "Students Impacted" },
               { number: "15M+", label: "Hours Saved Annually" }
             ].map((stat, index) => (
