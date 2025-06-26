@@ -241,9 +241,9 @@ const Pricing: React.FC = () => {
       price: 1499,
     },
     {
-      name: 'Zoom Live Classes',
-      description: 'Integrate Zoom for seamless virtual classroom experiences.',
-      price: 1999,
+      name: 'Multi Branch',
+      description: 'Manage multiple branches or campuses from a single system.',
+      price: 2999,
     },
     {
       name: 'Online Course',
@@ -251,19 +251,29 @@ const Pricing: React.FC = () => {
       price: 2499,
     },
     {
-      name: 'Transportation Management',
-      description: 'Fleet management and student transportation tracking',
-      price: 17990,
-    },
-    {
-      name: 'Enhanced Security Suite',
-      description: 'Advanced security features and audit logs',
+      name: 'QR Code Attendance',
+      description: 'Quick and accurate attendance tracking using QR codes.',
       price: 1999,
     },
     {
-      name: 'Multi-Campus Management',
-      description: 'Tools for managing multiple branches or campuses',
-      price: 2999,
+      name: 'Quick Fees',
+      description: 'Streamlined fee collection and management system.',
+      price: 1999,
+    },
+    {
+      name: 'Thermal Print',
+      description: 'Support for thermal printing of receipts.',
+      price: 1999,
+    },
+    {
+      name: 'Two-Factor Authenticator',
+      description: 'Enhanced security with two-factor authentication.',
+      price: 1999,
+    },
+    {
+      name: 'Zoom Live Classes',
+      description: 'Integrate Zoom for seamless virtual classroom experiences.',
+      price: 1999,
     }
   ];
   
