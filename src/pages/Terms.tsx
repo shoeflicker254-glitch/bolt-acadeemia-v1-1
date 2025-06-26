@@ -47,7 +47,7 @@ const Terms: React.FC = () => {
             </p>
             <ul className="list-disc pl-6 mb-6">
               <li><strong>SaaS Version:</strong> Cloud-based software as a service with subscription-based pricing</li>
-              <li><strong>Standalone Version:</strong> Self-hosted software with yesarly licensing fees</li>
+              <li><strong>Standalone Version:</strong> Self-hosted software with yearly licensing fees</li>
             </ul>
 
             <h2 className="text-2xl font-bold mb-4">3. User Accounts and Registration</h2>
