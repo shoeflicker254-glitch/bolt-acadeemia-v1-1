@@ -466,7 +466,31 @@ const Pricing: React.FC = () => {
           
           {showAddOns && (
             <>
-              <h3 className="text-2xl font-semibold mb-6 text-center">SaaS & Standalone Add-Ons</h3>
+              <h3 className="text-2xl font-semibold mb-6 text-center">SaaS Add-Ons</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full bg-white rounded-xl shadow-sm mb-12">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="px-6 py-4 text-left text-gray-700 font-semibold">Add-On Module</th>
+                      <th className="px-6 py-4 text-left text-gray-700 font-semibold">Description</th>
+                      <th className="px-6 py-4 text-right text-gray-700 font-semibold">
+                        Termly Cost
+                        <span className="ml-2 text-sm font-normal text-gray-500">(per institution)</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {addOns.map((addon, index) => (
+                      <tr key={index} className="hover:bg-gray-50">
+                        <td className="px-6 py-4 font-medium">{addon.name}</td>
+                        <td className="px-6 py-4 text-gray-600">{addon.description}</td>
+                        <td className="px-6 py-4 text-right font-medium">KES {addon.price.toLocaleString()}/term</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <h3 className="text-2xl font-semibold mb-6 text-center">Standalone Add-Ons</h3>
               <div className="overflow-x-auto">
                 <table className="w-full bg-white rounded-xl shadow-sm mb-12">
                   <thead>
