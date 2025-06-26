@@ -310,7 +310,7 @@ const Support: React.FC = () => {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Support Hours</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
               <div className="bg-white p-6 rounded-xl shadow-sm">
                 <Clock size={32} className="mx-auto text-primary-600 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Business Hours</h3>
