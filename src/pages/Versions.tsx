@@ -182,30 +182,30 @@ const Versions: React.FC = () => {
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      'Fees Collection',
-                      'Income',
-                      'Expense',
-                      'Student Attendance',
-                      'Examination',
-                      'Download Center',
-                      'Library',
-                      'Inventory',
-                      'Transport',
-                      'Hostel',
+                      'Alumni',
+                      'Annual Calendar',
+                      'Calendar To-Do List',
+                      'Certificate',
+                      'Chat',
                       'Communicate',
+                      'Download Center',
+                      'Examination',
+                      'Expense',
+                      'Fees Collection',
                       'Front CMS',
                       'Front Office',
                       'Homework',
-                      'Certificate',
-                      'Calendar To-Do List',
-                      'Online Examination',
-                      'Chat',
+                      'Hostel',
+                      'Income',
+                      'Inventory',
+                      'Lesson Plan',
+                      'Library',
                       'Multi Class',
                       'Online Admission',
-                      'Alumni',
-                      'Lesson Plan',
-                      'Annual Calendar',
-                      'Student CV'
+                      'Online Examination',
+                      'Student Attendance',
+                      'Student CV',
+                      'Transport'
                     ].map((module, index) => (
                       <div key={index} className="flex items-center">
                         <Check size={16} className="text-green-600 mr-2 flex-shrink-0" />
