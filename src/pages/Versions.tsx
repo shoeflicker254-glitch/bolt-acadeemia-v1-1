@@ -167,7 +167,10 @@ const Versions: React.FC = () => {
                     'Enhanced security with your own firewall and VPN options',
                     'Operate fully within your institution\'s network',
                     'Integration with existing systems and databases',
-                    'Tailored update schedule on your terms'
+                    'Tailored update schedule on your terms',
+                    'No dependency on third-party cloud services',
+                    'Scalable architecture to match your institutions growth',
+                    'Offline accessibility with local backup options'
                   ].map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <Check size={18} className="text-secondary-600 mr-2 mt-1 flex-shrink-0" />
