@@ -476,7 +476,7 @@ const Pricing: React.FC = () => {
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-start">
                 <span className="mr-2">•</span>
-                <span>Standalone version requires a one-time license fee plus optional ongoing services.</span>
+                <span>Standalone version requires a yearly license fee plus optional ongoing services</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2">•</span>
@@ -484,11 +484,15 @@ const Pricing: React.FC = () => {
               </li>
               <li className="flex items-start">
                 <span className="mr-2">•</span>
-                <span>After the included update period, an annual maintenance fee (15% of license cost) provides access to new updates.</span>
+                <span>We offer lifetime update period on all plans, and an annual maintenance fee (15% of license cost) provides access to platform maintenance throughout.</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2">•</span>
                 <span>Custom development services are available at an additional cost based on requirements.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>All training is offered free.</span>
               </li>
             </ul>
           </div>
