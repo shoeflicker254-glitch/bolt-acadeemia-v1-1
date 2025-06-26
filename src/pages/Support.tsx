@@ -328,7 +328,7 @@ const Support: React.FC = () => {
               </div>
 
               <div className="bg-white p-6 rounded-xl shadow-sm">
-                <Chat size={32} className="mx-auto text-secondary-600 mb-4" />
+                <Mail size={32} className="mx-auto text-secondary-600 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Call & Chat Support</h3>
                 <p className="text-gray-600 mb-4">Available 24/7</p>
                 <p className="text-2xl font-bold text-secondary-600">Always Open</p>
