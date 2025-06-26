@@ -201,7 +201,40 @@ const Pricing: React.FC = () => {
     }
   ];
   
-  const addOns = [
+  const saasaddOns = [
+    {
+      name: 'Zoom Live Classes (Standalone)',
+      description: 'Integrate Zoom for seamless virtual classroom experiences.',
+      price: 1999,
+    },
+    {
+      name: 'Gmeet Live Classes (Standalone)',
+      description: 'Google Meet integration for virtual learning',
+      price: 1499,
+    },
+    {
+      name: 'Advanced Data Analytics',
+      description: 'Predictive analytics and detailed institutional insights',
+      price: 2499,
+    },
+    {
+      name: 'Transportation Management',
+      description: 'Fleet management and student transportation tracking',
+      price: 17990,
+    },
+    {
+      name: 'Enhanced Security Suite',
+      description: 'Advanced security features and audit logs',
+      price: 1999,
+    },
+    {
+      name: 'Multi-Campus Management',
+      description: 'Tools for managing multiple branches or campuses',
+      price: 2999,
+    }
+  ];
+
+  const standaloneaddOns = [
     {
       name: 'Zoom Live Classes (Standalone)',
       description: 'Integrate Zoom for seamless virtual classroom experiences.',
@@ -480,11 +513,11 @@ const Pricing: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {addOns.map((addon, index) => (
+                    {saasaddOns.map((saasaddon, index) => (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 font-medium">{addon.name}</td>
-                        <td className="px-6 py-4 text-gray-600">{addon.description}</td>
-                        <td className="px-6 py-4 text-right font-medium">KES {addon.price.toLocaleString()}/term</td>
+                        <td className="px-6 py-4 font-medium">{saasaddon.name}</td>
+                        <td className="px-6 py-4 text-gray-600">{saasaddon.description}</td>
+                        <td className="px-6 py-4 text-right font-medium">KES {saasaddon.price.toLocaleString()}/term</td>
                       </tr>
                     ))}
                   </tbody>
@@ -504,11 +537,11 @@ const Pricing: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {addOns.map((addon, index) => (
+                    {standaloneaddOns.map((standaloneaddon, index) => (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 font-medium">{addon.name}</td>
-                        <td className="px-6 py-4 text-gray-600">{addon.description}</td>
-                        <td className="px-6 py-4 text-right font-medium">KES {addon.price.toLocaleString()}/term</td>
+                        <td className="px-6 py-4 font-medium">{standaloneaddon.name}</td>
+                        <td className="px-6 py-4 text-gray-600">{standaloneaddon.description}</td>
+                        <td className="px-6 py-4 text-right font-medium">KES {standaloneaddon.price.toLocaleString()}/term</td>
                       </tr>
                     ))}
                   </tbody>
