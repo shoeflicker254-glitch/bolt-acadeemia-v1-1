@@ -40,12 +40,12 @@ const Pricing: React.FC = () => {
         { text: 'Fees management', included: true },
         { text: 'Bulk SMS integration', included: true },
         { text: 'Bulk email integration', included: true },
-        { text: 'MPESA Paybill integration', included: true },
+        { text: 'Payment Gateways integration', included: true },
         { text: 'Academics/Exams', included: true },
         { text: 'Transport management', included: true },
         { text: 'Library management', included: true },
-        { text: 'Daycare management', included: true },
-        { text: 'Uniform management', included: true },
+        { text: 'Inventory management', included: true },
+        { text: 'Hostel management', included: true },
         { text: 'Expenses management', included: true },
         { text: 'Attendance management', included: true },
         { text: 'Staff management', included: true },
@@ -68,12 +68,12 @@ const Pricing: React.FC = () => {
         { text: 'Fees management', included: true },
         { text: 'Bulk SMS integration', included: true },
         { text: 'Bulk email integration', included: true },
-        { text: 'MPESA Paybill integration', included: true },
+        { text: 'Payment Gateways integration', included: true },
         { text: 'Academics/Exams', included: true },
         { text: 'Transport management', included: true },
         { text: 'Library management', included: true },
-        { text: 'Daycare management', included: true },
-        { text: 'Uniform management', included: true },
+        { text: 'Inventory management', included: true },
+        { text: 'Hostel management', included: true },
         { text: 'Expenses management', included: true },
         { text: 'Attendance management', included: true },
         { text: 'Staff management', included: true },
@@ -96,12 +96,12 @@ const Pricing: React.FC = () => {
         { text: 'Fees management', included: true },
         { text: 'Bulk SMS integration', included: true },
         { text: 'Bulk email integration', included: true },
-        { text: 'MPESA Paybill integration', included: true },
+        { text: 'Payment Gateways integration', included: true },
         { text: 'Academics/Exams', included: true },
         { text: 'Transport management', included: true },
         { text: 'Library management', included: true },
-        { text: 'Daycare management', included: true },
-        { text: 'Uniform management', included: true },
+        { text: 'Inventory management', included: true },
+        { text: 'Hostel management', included: true },
         { text: 'Expenses management', included: true },
         { text: 'Attendance management', included: true },
         { text: 'Staff management', included: true },
@@ -125,12 +125,12 @@ const Pricing: React.FC = () => {
         { text: 'Fees management', included: true },
         { text: 'Bulk SMS integration', included: true },
         { text: 'Bulk email integration', included: true },
-        { text: 'MPESA Paybill integration', included: true },
+        { text: 'Payment Gateways integration', included: true },
         { text: 'Academics/Exams', included: true },
         { text: 'Transport management', included: true },
         { text: 'Library management', included: true },
-        { text: 'Daycare management', included: true },
-        { text: 'Uniform management', included: true },
+        { text: 'Inventory management', included: true },
+        { text: 'Hostel management', included: true },
         { text: 'Expenses management', included: true },
         { text: 'Attendance management', included: true },
         { text: 'Staff management', included: true },
@@ -155,7 +155,7 @@ const Pricing: React.FC = () => {
         { text: 'Core modules', included: true },
         { text: 'Initial deployment', included: true },
         { text: 'Basic configuration', included: true },
-        { text: '6 months of updates', included: true },
+        { text: 'Life-time of updates', included: true },
         { text: 'Advanced customization', included: false },
         { text: 'Extended support', included: false },
         { text: 'Hosting services', included: false },
@@ -173,7 +173,7 @@ const Pricing: React.FC = () => {
         { text: 'All core modules', included: true },
         { text: 'Professional deployment', included: true },
         { text: 'Advanced configuration', included: true },
-        { text: '12 months of updates', included: true },
+        { text: 'Life-time of updates', included: true },
         { text: 'Basic customization', included: true },
         { text: '12 months of support', included: true },
         { text: 'Hosting services', included: false },
@@ -192,7 +192,7 @@ const Pricing: React.FC = () => {
         { text: 'All core & premium modules', included: true },
         { text: 'White-glove deployment', included: true },
         { text: 'Custom configuration', included: true },
-        { text: '24 months of updates', included: true },
+        { text: 'Life-time of updates', included: true },
         { text: 'Extensive customization', included: true },
         { text: '24 months of premium support', included: true },
         { text: '12 months hosting included', included: true },
@@ -203,13 +203,13 @@ const Pricing: React.FC = () => {
   
   const addOns = [
     {
-      name: 'Advanced Learning Management',
-      description: 'Enhanced e-learning platform with interactive content',
+      name: 'Zoom Live Classes (Standalone)',
+      description: 'Integrate Zoom for seamless virtual classroom experiences.',
       price: 1999,
     },
     {
-      name: 'Alumni Network Portal',
-      description: 'Platform for graduates to stay connected',
+      name: 'Gmeet Live Classes (Standalone)',
+      description: 'Google Meet integration for virtual learning',
       price: 1499,
     },
     {
@@ -376,6 +376,10 @@ const Pricing: React.FC = () => {
               <li className="flex items-start">
                 <span className="mr-2">•</span>
                 <span>All plans include unlimited users and 24/7 access with full-time support.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>All platform training is free.</span>
               </li>
             </ul>
           </div>
