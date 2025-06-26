@@ -9,6 +9,10 @@ import Demo from './pages/Demo';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
+import FAQ from './pages/FAQ';
+import Support from './pages/Support';
 import TawkChat from './components/ui/TawkChat';
 
 function App() {
@@ -25,6 +29,10 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/support" element={<Support />} />
           </Routes>
         </main>
         <Footer />
