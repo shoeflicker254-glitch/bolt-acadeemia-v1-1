@@ -315,7 +315,7 @@ const Support: React.FC = () => {
                 <Clock size={32} className="mx-auto text-primary-600 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Business Hours</h3>
                 <p className="text-gray-600 mb-4">Monday - Friday</p>
-                <p className="text-2xl font-bold text-primary-600">7:00am - 5:00pm</p>
+                <p className="text-2xl font-bold text-primary-600">7:00 am - 5:00 pm</p>
                 <p className="text-sm text-gray-500 mt-2">East Africa Time (EAT)</p>
               </div>
               
