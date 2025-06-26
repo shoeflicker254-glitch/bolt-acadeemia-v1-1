@@ -43,12 +43,13 @@ const Versions: React.FC = () => {
                 <ul className="space-y-3">
                   {[
                     'Multi-school management capabilities',
-                    'Instant access with free trial period',
+                    'Instant access with 1 Month free trial period',
                     'Online subscription purchase and renewal',
                     'Automatic updates with the latest features',
-                    'Accessible anywhere with internet connection',
+                    'Accessible anywhere with an internet connection',
                     'Scalable resources based on your needs',
                     'Reduced IT overhead and maintenance',
+                    'PWA enabled',
                     'Enterprise-grade security and backups'
                   ].map((feature, index) => (
                     <li key={index} className="flex items-start">
