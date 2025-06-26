@@ -323,7 +323,7 @@ const Pricing: React.FC = () => {
    {
       name: 'Onboarding (Standalone)',
       description: 'The setup of schools data e.g teachers, students, parents etc.',
-      price: 9999
+      price: 9999,
       unit: 'one-time'
     }
   ];
