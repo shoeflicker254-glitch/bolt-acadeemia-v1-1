@@ -170,7 +170,8 @@ const Versions: React.FC = () => {
                     'Tailored update schedule on your terms',
                     'No dependency on third-party cloud services',
                     'Scalable architecture to match your institutions growth',
-                    'Offline accessibility with local backup options'
+                    'Offline accessibility with local backup options',
+                    'Full administrative control and role-based permissions'
                   ].map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <Check size={18} className="text-secondary-600 mr-2 mt-1 flex-shrink-0" />
