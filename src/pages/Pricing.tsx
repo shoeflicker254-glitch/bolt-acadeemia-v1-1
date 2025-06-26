@@ -466,7 +466,7 @@ const Pricing: React.FC = () => {
           
           {showAddOns && (
             <>
-              <h3 className="text-2xl font-semibold mb-6 text-center">System Add-Ons</h3>
+              <h3 className="text-2xl font-semibold mb-6 text-center">SaaS & Standalone Add-Ons</h3>
               <div className="overflow-x-auto">
                 <table className="w-full bg-white rounded-xl shadow-sm mb-12">
                   <thead>
