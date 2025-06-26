@@ -26,7 +26,7 @@ const About: React.FC = () => {
               <span className="inline-block px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium mb-4">Our Story</span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Transforming Education Management</h2>
               <p className="text-lg text-gray-700 mb-6">
-                Acadeemia was founded in 2017 by a team of educators, technologists, and education administrators who recognized the need for a comprehensive, user-friendly school management system that could adapt to diverse educational environments.
+                Acadeemia was founded in 2017 by Michael Mwaringa. Due to the lack of a management system in his fathers school, he recognized the need for a comprehensive, user-friendly school management system that could adapt to diverse educational environments.
               </p>
               <p className="text-lg text-gray-700 mb-6">
                 What began as a solution for a single university quickly evolved into a versatile platform serving hundreds of educational institutions worldwide. Our journey has been guided by a simple principle: technology should enhance education, not complicate it.
