@@ -281,38 +281,50 @@ const Pricing: React.FC = () => {
     {
       name: 'Managed Hosting (Standard)',
       description: 'For Standalone version',
-      price: 1999,
-      unit: 'month'
+      price: 3999,
+      unit: 'term'
     },
     {
       name: 'Managed Hosting (Premium)',
       description: 'For Standalone version with enhanced resources',
-      price: 3499,
-      unit: 'month'
+      price: 8499,
+      unit: 'term'
     },
     {
       name: 'Custom Domain Setup',
       description: 'For SaaS version',
-      price: 1999,
-      unit: 'one-time'
+      price: 3499,
+      unit: 'year'
     },
     {
       name: 'Data Migration - Basic',
       description: 'From standard formats',
       price: 4999,
-      unit: 'one-time'
+      unit: 'year'
     },
     {
       name: 'Data Migration - Complex',
       description: 'From custom or legacy systems',
       price: 14999,
-      unit: 'one-time'
+      unit: 'year'
     },
     {
       name: 'Premium Support Package',
       description: 'Dedicated account manager and priority response',
-      price: 2999,
-      unit: 'month'
+      price: 4999,
+      unit: 'term'
+    },
+    {
+      name: 'Onboarding (SaaS)',
+      description: 'The setup of schools data e.g teachers, students, parents etc.',
+      price: 4999,
+      unit: 'one-time'
+    },
+   {
+      name: 'Onboarding (Standalone)',
+      description: 'The setup of schools data e.g teachers, students, parents etc.',
+      price: 9999
+      unit: 'one-time'
     }
   ];
   
