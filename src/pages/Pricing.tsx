@@ -203,51 +203,51 @@ const Pricing: React.FC = () => {
   
   const saasaddOns = [
     {
-      name: 'Zoom Live Classes (Standalone)',
-      description: 'Integrate Zoom for seamless virtual classroom experiences.',
-      price: 1999,
+      name: 'QR Code Attendance ',
+      description: 'Advanced attendance tracking using QR codes for quick and accurate recording.',
+      price: 3999,
     },
     {
-      name: 'Gmeet Live Classes (Standalone)',
-      description: 'Google Meet integration for virtual learning',
-      price: 1499,
-    },
-    {
-      name: 'Advanced Data Analytics',
-      description: 'Predictive analytics and detailed institutional insights',
+      name: 'Two-Factor Authentication',
+      description: 'Enhanced security with two-factor authentication for user accounts.',
       price: 2499,
-    },
-    {
-      name: 'Transportation Management',
-      description: 'Fleet management and student transportation tracking',
-      price: 17990,
-    },
-    {
-      name: 'Enhanced Security Suite',
-      description: 'Advanced security features and audit logs',
-      price: 1999,
-    },
-    {
-      name: 'Multi-Campus Management',
-      description: 'Tools for managing multiple branches or campuses',
-      price: 2999,
     }
   ];
 
   const standaloneaddOns = [
     {
-      name: 'Zoom Live Classes (Standalone)',
-      description: 'Integrate Zoom for seamless virtual classroom experiences.',
+      name: 'Android App',
+      description: 'Mobile access through dedicated Android application.',
       price: 1999,
     },
     {
-      name: 'Gmeet Live Classes (Standalone)',
+      name: 'Behaviour Records',
+      description: 'Track and manage student behavior and disciplinary records.',
+      price: 1999,
+    },
+    {
+      name: 'Biometrics Entry',
+      description: 'Biometric authentication for secure access control.',
+      price: 1999,
+    },
+    {
+      name: 'CBSE Examination',
+      description: 'Specialized module for CBSE examination management.',
+      price: 1999,
+    },
+    {
+      name: 'Gmeet Live Classes',
       description: 'Google Meet integration for virtual learning',
       price: 1499,
     },
     {
-      name: 'Advanced Data Analytics',
-      description: 'Predictive analytics and detailed institutional insights',
+      name: 'Zoom Live Classes',
+      description: 'Integrate Zoom for seamless virtual classroom experiences.',
+      price: 1999,
+    },
+    {
+      name: 'Online Course',
+      description: 'Complete online course management system.',
       price: 2499,
     },
     {
