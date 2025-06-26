@@ -422,7 +422,7 @@ const Pricing: React.FC = () => {
               </li>
               <li className="flex items-start">
                 <span className="mr-2">•</span>
-                <span>Annual billing provides a 20% discount compared to monthly billing.</span>
+                <span>Annual billing provides a 10% discount compared to monthly billing.</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2">•</span>
