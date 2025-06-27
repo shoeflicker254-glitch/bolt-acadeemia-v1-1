@@ -237,7 +237,12 @@ const Demo: React.FC = () => {
                   'Student profiles and records',
                   'Enrollment and registration',
                   'Attendance tracking',
-                  'Academic progress monitoring'
+                  'Academic progress monitoring',
+                  'Behavior and discipline tracking',
+                  'Health and medical information management',
+                  'Parent/guardian contact management',
+                  'ID card generation and student grouping',
+                  'Student promotion and graduation workflows'
                 ]
               },
               {
@@ -247,6 +252,33 @@ const Demo: React.FC = () => {
                   'Curriculum planning',
                   'Grading and assessments',
                   'Timetable scheduling'
+                ]
+              },
+              {
+                title: 'Administrative Tools',
+                list: [
+                  'Financial management',
+                  'Staff management',
+                  'Reporting and analytics',
+                  'Communication tools'
+                ]
+              },
+              {
+                title: 'Administrative Tools',
+                list: [
+                  'Financial management',
+                  'Staff management',
+                  'Reporting and analytics',
+                  'Communication tools'
+                ]
+              },
+              {
+                title: 'Administrative Tools',
+                list: [
+                  'Financial management',
+                  'Staff management',
+                  'Reporting and analytics',
+                  'Communication tools'
                 ]
               },
               {
