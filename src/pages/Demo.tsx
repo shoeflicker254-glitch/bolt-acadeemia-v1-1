@@ -188,7 +188,15 @@ const Demo: React.FC = () => {
                   'Opportunity to ask questions in real-time',
                   'Detailed exploration of relevant features',
                   'Discussion of customization options',
-                  'Implementation and migration insights'
+                  'Implementation and migration insights',
+                  'Walkthrough of both SaaS and standalone versions',
+                  'Overview of user roles and permissions setup',
+                  'Guidance on integrating your existing systems and data',
+                  'Breakdown of licensing and pricing options',
+                  'Advice on best practices for onboarding your staff and users',
+                  'Data privacy and backup strategy overview',
+                  'Support and training resources overview',
+                  'Time for feedback and next steps planning'
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
                     <ArrowRight size={18} className="text-primary-600 mr-2 mt-1 flex-shrink-0" />
