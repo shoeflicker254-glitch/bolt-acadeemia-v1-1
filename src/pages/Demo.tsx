@@ -251,9 +251,12 @@ const Demo: React.FC = () => {
                   'Course management',
                   'Curriculum planning',
                   'Grading and assessments',
+                  'Exam scheduling and result publishing',
                   'Timetable scheduling',
-                  'Timetable scheduling',
-                    
+                  'Homework and assignment tracking',
+                  'Syllabus uploading and sharing',
+                  'Report cards and transcripts generation',
+                  'Online classes and lesson planning,
                 ]
               },
               {
