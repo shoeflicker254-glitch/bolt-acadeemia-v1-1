@@ -23,13 +23,13 @@ const CookieConsent: React.FC = () => {
     // Check if user has already made a choice
     const cookieConsent = localStorage.getItem('cookieConsent');
     if (!cookieConsent) {
-      // Show banner after a short delay
+      // Show banner after a short delay for new visitors only
       const timer = setTimeout(() => {
         setShowBanner(true);
       }, 1000);
       return () => clearTimeout(timer);
     } else {
-      // Load saved preferences
+      // Load saved preferences but don't show any UI
       try {
         const savedPreferences = JSON.parse(cookieConsent);
         setPreferences(savedPreferences);
@@ -105,91 +105,75 @@ const CookieConsent: React.FC = () => {
     }));
   };
 
-  const resetCookieSettings = () => {
-    localStorage.removeItem('cookieConsent');
-    setPreferences({
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      functional: false,
-    });
-    setShowBanner(true);
-    setShowSettings(false);
-  };
-
-  if (!showBanner) {
-    return (
-      <button
-        onClick={resetCookieSettings}
-        className="fixed bottom-4 left-4 z-40 p-2 bg-gray-600 text-white rounded-full shadow-lg hover:bg-gray-700 transition-colors"
-        title="Cookie Settings"
-      >
-        <Cookie size={20} />
-      </button>
-    );
+  // Don't render anything if user has already made a choice
+  const hasUserConsented = localStorage.getItem('cookieConsent');
+  if (hasUserConsented && !showBanner) {
+    return null;
   }
 
   return (
     <>
-      {/* Cookie Banner */}
-      <div className="fixed bottom-4 left-4 z-50 max-w-sm bg-white rounded-lg shadow-xl border border-gray-200 animate-fade-in">
-        <div className="p-6">
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-center">
-              <Cookie size={24} className="text-primary-600 mr-2 flex-shrink-0" />
-              <h3 className="text-lg font-semibold text-gray-900">Cookie Settings</h3>
+      {/* Cookie Banner - Only shown for new visitors */}
+      {showBanner && (
+        <div className="fixed bottom-4 left-4 z-50 max-w-sm bg-white rounded-lg shadow-xl border border-gray-200 animate-fade-in">
+          <div className="p-6">
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center">
+                <Cookie size={24} className="text-primary-600 mr-2 flex-shrink-0" />
+                <h3 className="text-lg font-semibold text-gray-900">Cookie Settings</h3>
+              </div>
+              <button
+                onClick={() => setShowBanner(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X size={20} />
+              </button>
             </div>
-            <button
-              onClick={() => setShowBanner(false)}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <X size={20} />
-            </button>
-          </div>
-          
-          <p className="text-sm text-gray-600 mb-4">
-            We use cookies to enhance your experience, analyze site traffic, and personalize content. 
-            Choose your preferences below.
-          </p>
-          
-          <div className="space-y-3">
-            <Button
-              variant="primary"
-              size="sm"
-              fullWidth
-              onClick={handleAcceptAll}
-            >
-              Accept All Cookies
-            </Button>
             
-            <Button
-              variant="outline"
-              size="sm"
-              fullWidth
-              onClick={handleAcceptNecessary}
-            >
-              Accept Necessary Only
-            </Button>
+            <p className="text-sm text-gray-600 mb-4">
+              We use cookies to enhance your experience, analyze site traffic, and personalize content. 
+              Choose your preferences below.
+            </p>
             
-            <Button
-              variant="outline"
-              size="sm"
-              fullWidth
-              icon={<Settings size={16} />}
-              onClick={() => setShowSettings(true)}
-            >
-              Customize Settings
-            </Button>
+            <div className="space-y-3">
+              <Button
+                variant="primary"
+                size="sm"
+                fullWidth
+                onClick={handleAcceptAll}
+              >
+                Accept All Cookies
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                fullWidth
+                onClick={handleAcceptNecessary}
+              >
+                Accept Necessary Only
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                fullWidth
+                icon={<Settings size={16} />}
+                onClick={() => setShowSettings(true)}
+              >
+                Customize Settings
+              </Button>
+            </div>
+            
+            <p className="text-xs text-gray-500 mt-3">
+              By continuing to use our site, you agree to our{' '}
+              <a href="/privacy" className="text-primary-600 hover:text-primary-700 underline">
+                Privacy Policy
+              </a>
+            </p>
           </div>
-          
-          <p className="text-xs text-gray-500 mt-3">
-            By continuing to use our site, you agree to our{' '}
-            <a href="/privacy" className="text-primary-600 hover:text-primary-700 underline">
-              Privacy Policy
-            </a>
-          </p>
         </div>
-      </div>
+      )}
 
       {/* Cookie Settings Modal */}
       {showSettings && (
