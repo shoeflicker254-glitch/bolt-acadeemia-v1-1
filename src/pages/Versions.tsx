@@ -330,7 +330,7 @@ const Versions: React.FC = () => {
                   {
                     feature: 'Online Payment',
                     saas: { icon: <Check size={18} />, text: 'Built-in subscription management' },
-                    standalone: { icon: <X size={18} />, text: 'One-time license' }
+                    standalone: { icon: <X size={18} />, text: 'Yearly license' }
                   },
                   {
                     feature: 'Customization Flexibility',
