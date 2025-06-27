@@ -14,6 +14,7 @@ import Privacy from './pages/Privacy';
 import FAQ from './pages/FAQ';
 import Support from './pages/Support';
 import TawkChat from './components/ui/TawkChat';
+import CookieConsent from './components/ui/CookieConsent';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         </main>
         <Footer />
         <TawkChat />
+        <CookieConsent />
       </div>
     </Router>
   );
