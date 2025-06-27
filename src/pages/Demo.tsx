@@ -165,7 +165,7 @@ const Demo: React.FC = () => {
                   Username: demoparent@acadeemia.com<br />
                   Password: AcadeemiaDemo<br />
                   ACCOUNTANT<br />
-                  Username: sdemoaccountant@acadeemia.com<br />
+                  Username: demoaccountant@acadeemia.com<br />
                   Password: AcadeemiaDemo<br />
                   RECEPTIONIST<br />
                   Username: demoreceptionist@acadeemia.com<br />
