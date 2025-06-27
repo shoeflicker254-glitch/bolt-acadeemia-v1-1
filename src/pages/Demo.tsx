@@ -267,33 +267,6 @@ const Demo: React.FC = () => {
                   'Reporting and analytics',
                   'Communication tools'
                 ]
-              },
-              {
-                title: 'Administrative Tools',
-                list: [
-                  'Financial management',
-                  'Staff management',
-                  'Reporting and analytics',
-                  'Communication tools'
-                ]
-              },
-              {
-                title: 'Administrative Tools',
-                list: [
-                  'Financial management',
-                  'Staff management',
-                  'Reporting and analytics',
-                  'Communication tools'
-                ]
-              },
-              {
-                title: 'Administrative Tools',
-                list: [
-                  'Financial management',
-                  'Staff management',
-                  'Reporting and analytics',
-                  'Communication tools'
-                ]
               }
             ].map((section, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
