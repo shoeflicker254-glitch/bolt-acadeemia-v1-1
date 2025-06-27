@@ -141,7 +141,7 @@ const Demo: React.FC = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-secondary-600 font-medium hover:text-secondary-700"
                       >
-                        Launch Standalone Demo
+                        Launch Standalone School Website Demo
                         <ExternalLink size={16} className="ml-1" />
                       </a>
                     </div>
