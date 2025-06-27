@@ -151,8 +151,10 @@ const Versions: React.FC = () => {
                 <div className="p-4 bg-secondary-50 rounded-full mr-4">
                   <Server size={32} className="text-secondary-600" />
                 </div>
-                <h2 className="text-3xl font-bold">Standalone Version</h2>
-                <p className="text-primary-600 mt-1">Demos Available</p>
+                <div>
+                  <h2 className="text-3xl font-bold">Standalone Version</h2>
+                  <p className="text-primary-600 mt-1">Demos Available</p>
+                </div>
               </div>
               
               <p className="text-lg text-gray-700 mb-6">
