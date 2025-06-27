@@ -193,8 +193,7 @@ const Demo: React.FC = () => {
                   'Explore financial and fee management tools',
                   'Custom branding, subdomain setup, and white-label options',
                   'Optional language support and localization settings',
-                  'Insight into cloud hosting vs on-premise deployment',
-                  'Training  for school staff'
+                  'Insight into cloud hosting vs on-premise deployment'
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
                     <ArrowRight size={18} className="text-primary-600 mr-2 mt-1 flex-shrink-0" />
