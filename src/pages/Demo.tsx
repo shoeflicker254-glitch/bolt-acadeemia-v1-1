@@ -108,15 +108,6 @@ const Demo: React.FC = () => {
                       <h4 className="text-lg font-semibold mb-2">SaaS Demo</h4>
                       <p className="text-gray-600 mb-4">Experience our cloud-based solution with sample data.</p>
                       <a 
-                        href="https://saas.acadeemia.com/" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-primary-600 font-medium hover:text-primary-700"
-                      >
-                        Launch SaaS Main Website
-                        <ExternalLink size={16} className="ml-1" />
-                      </a>
-                      <a 
                         href="https://saas.acadeemia.com/saasdemo" 
                         target="_blank" 
                         rel="noopener noreferrer"
