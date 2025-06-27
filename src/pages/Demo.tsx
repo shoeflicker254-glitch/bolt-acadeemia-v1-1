@@ -251,7 +251,9 @@ const Demo: React.FC = () => {
                   'Course management',
                   'Curriculum planning',
                   'Grading and assessments',
-                  'Timetable scheduling'
+                  'Timetable scheduling',
+                  'Timetable scheduling',
+                    
                 ]
               },
               {
