@@ -196,7 +196,14 @@ const Demo: React.FC = () => {
                   'Advice on best practices for onboarding your staff and users',
                   'Data privacy and backup strategy overview',
                   'Support and training resources overview',
-                  'Time for feedback and next steps planning'
+                  'Time for feedback and next steps planning',
+                  'Demonstration of real-time communication tools (e.g. SMS, WhatsApp)',
+                  'Insight into performance tracking and reporting features',
+                  'Explore financial and fee management tools',
+                  'Custom branding, subdomain setup, and white-label options',
+                  'Optional language support and localization settings',
+                  'Insight into cloud hosting vs on-premise deployment',
+                  'Training  for school staff'
                 ].map((item, index) => (
                   <li key={index} className="flex items-start">
                     <ArrowRight size={18} className="text-primary-600 mr-2 mt-1 flex-shrink-0" />
