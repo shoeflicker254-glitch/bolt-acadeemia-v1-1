@@ -265,7 +265,12 @@ const Demo: React.FC = () => {
                   'Financial management',
                   'Staff management',
                   'Reporting and analytics',
-                  'Communication tools'
+                  'Communication tools',
+                  'Document and certificate generation (TCs, letters)',
+                  'Asset and inventory management',
+                  'Hostel and transport management',
+                  'Admission management and online application portal',
+                  'Licensing and permission control system'
                 ]
               }
             ].map((section, index) => (
