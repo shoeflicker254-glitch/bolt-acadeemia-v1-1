@@ -256,7 +256,7 @@ const Demo: React.FC = () => {
                   'Homework and assignment tracking',
                   'Syllabus uploading and sharing',
                   'Report cards and transcripts generation',
-                  'Online classes and lesson planning,
+                  'Online classes and lesson planning'
                 ]
               },
               {
