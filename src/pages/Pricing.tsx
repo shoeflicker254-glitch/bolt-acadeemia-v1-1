@@ -463,7 +463,7 @@ const Pricing: React.FC = () => {
                 highlight={plan.highlight}
                 badge={plan.badge}
                 buttonText="Contact Sales"
-                onButtonClick={() => window.location.href = '/Contact'}
+                onButtonClick={() => window.location.href = '/contact'}
               />
             ))}
           </div>
