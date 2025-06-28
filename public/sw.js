@@ -1,20 +1,20 @@
-const CACHE_NAME = 'acadeemia-v2';
+const CACHE_NAME = 'acadeemia-v3';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
   '/static/css/main.css',
   '/manifest.json',
-  '/icon-48x48.png',
-  '/icon-72x72.png',
-  '/icon-96x96.png',
-  '/icon-144x144.png',
-  '/icon-192x192.png',
-  '/android-chrome-192x192.png',
-  '/android-chrome-512x512.png',
-  '/apple-touch-icon.png',
-  '/favicon.ico',
-  '/favicon-16x16.png',
-  '/favicon-32x32.png'
+  '/assets/icons/icon-48x48.png',
+  '/assets/icons/icon-72x72.png',
+  '/assets/icons/icon-96x96.png',
+  '/assets/icons/icon-144x144.png',
+  '/assets/icons/icon-192x192.png',
+  '/assets/icons/android-chrome-192x192.png',
+  '/assets/icons/android-chrome-512x512.png',
+  '/assets/icons/apple-touch-icon.png',
+  '/assets/icons/favicon.ico',
+  '/assets/icons/favicon-16x16.png',
+  '/assets/icons/favicon-32x32.png'
 ];
 
 // Install event
@@ -100,8 +100,8 @@ self.addEventListener('push', (event) => {
   
   const options = {
     body: event.data ? event.data.text() : 'New notification from Acadeemia',
-    icon: '/icon-192x192.png',
-    badge: '/icon-96x96.png',
+    icon: '/assets/icons/icon-192x192.png',
+    badge: '/assets/icons/icon-96x96.png',
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
@@ -111,12 +111,12 @@ self.addEventListener('push', (event) => {
       {
         action: 'explore',
         title: 'Open Acadeemia',
-        icon: '/icon-192x192.png'
+        icon: '/assets/icons/icon-192x192.png'
       },
       {
         action: 'close',
         title: 'Close',
-        icon: '/icon-192x192.png'
+        icon: '/assets/icons/icon-192x192.png'
       }
     ]
   };
