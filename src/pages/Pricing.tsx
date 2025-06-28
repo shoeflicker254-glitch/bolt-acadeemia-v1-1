@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Check, HelpCircle, Cloud, Server, Plus, AlertTriangle
 } from 'lucide-react';
@@ -7,6 +7,7 @@ import Button from '../components/ui/Button';
 import PricingCard from '../components/ui/PricingCard';
 
 const Pricing: React.FC = () => {
+  const navigate = useNavigate();
   const [billingPeriod, setBillingPeriod] = useState<'termly' | 'annual'>('annual');
   const [showAddOns, setShowAddOns] = useState(true);
   
@@ -16,6 +17,10 @@ const Pricing: React.FC = () => {
   
   const toggleAddOns = () => {
     setShowAddOns(!showAddOns);
+  };
+
+  const handleContactSales = () => {
+    navigate('/contact');
   };
   
   // Calculate discounted prices for annual billing (10% discount)
@@ -401,7 +406,7 @@ const Pricing: React.FC = () => {
                 highlight={plan.highlight}
                 badge={plan.badge}
                 buttonText="Subscribe Now"
-                onButtonClick={() => window.location.href = '/contact'}
+                onButtonClick={handleContactSales}
               />
             ))}
           </div>
@@ -463,7 +468,7 @@ const Pricing: React.FC = () => {
                 highlight={plan.highlight}
                 badge={plan.badge}
                 buttonText="Contact Sales"
-                onButtonClick={() => window.location.href = '/contact'}
+                onButtonClick={handleContactSales}
               />
             ))}
           </div>
@@ -652,15 +657,14 @@ const Pricing: React.FC = () => {
               Contact our sales team for a personalized quote or to discuss custom requirements.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Contact Sales
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleContactSales}
+              >
+                Contact Sales
+              </Button>
               <Link to="/demo">
                 <Button 
                   variant="outline" 
