@@ -7,6 +7,20 @@ import {
 import Button from '../components/ui/Button';
 import EmailSupportModal from '../components/ui/EmailSupportModal';
 
+// Declare Tawk_API types
+declare global {
+  interface Window {
+    Tawk_API?: {
+      toggle: () => void;
+      maximize: () => void;
+      minimize: () => void;
+      showWidget: () => void;
+      hideWidget: () => void;
+      onLoad?: () => void;
+    };
+  }
+}
+
 const Support: React.FC = () => {
   const [selectedTicketType, setSelectedTicketType] = useState('');
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
@@ -22,6 +36,30 @@ const Support: React.FC = () => {
     e.preventDefault();
     // Handle ticket submission
     console.log('Ticket submitted:', ticketForm);
+  };
+
+  const handleStartChat = () => {
+    // Check if Tawk.to is loaded and available
+    if (window.Tawk_API) {
+      try {
+        // Show the widget if it's hidden
+        window.Tawk_API.showWidget();
+        // Maximize/open the chat widget
+        window.Tawk_API.maximize();
+      } catch (error) {
+        console.error('Error opening Tawk chat:', error);
+        // Fallback: try the toggle method
+        try {
+          window.Tawk_API.toggle();
+        } catch (toggleError) {
+          console.error('Error toggling Tawk chat:', toggleError);
+          alert('Chat widget is not available at the moment. Please try refreshing the page or contact us via email.');
+        }
+      }
+    } else {
+      // Tawk.to not loaded yet, show a message
+      alert('Chat widget is loading. Please wait a moment and try again, or contact us via email.');
+    }
   };
 
   const supportChannels = [
@@ -53,12 +91,7 @@ const Support: React.FC = () => {
       responseTime: '< 5 minutes',
       availability: 'Mon-Fri 8AM-6PM EAT',
       buttonText: 'Start Chat',
-      action: () => {
-        // Trigger Tawk.to chat if available
-        if (window.Tawk_API) {
-          window.Tawk_API.toggle();
-        }
-      }
+      action: handleStartChat
     }
   ];
 
