@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ExternalLink, Monitor, Server, ArrowRight, Calendar } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+import { useLocation } from 'react-router-dom';
 
 // Declare Calendly types
 declare global {
@@ -19,6 +20,7 @@ declare global {
 }
 
 const Demo: React.FC = () => {
+  const location = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,6 +51,18 @@ const Demo: React.FC = () => {
       }
     };
   }, []);
+
+  // Handle scrolling to demo form if hash is present
+  useEffect(() => {
+    if (location.hash === '#demo-request-form') {
+      setTimeout(() => {
+        const element = document.getElementById('demo-request-form');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location.hash]);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

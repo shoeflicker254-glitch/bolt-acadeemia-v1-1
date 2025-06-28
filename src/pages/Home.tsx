@@ -1,12 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Cloud, Server, Users, BookOpen, Award, Check, BarChart } from 'lucide-react';
 import Button from '../components/ui/Button';
 import FeatureCard from '../components/ui/FeatureCard';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+
   const handleNavClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleRequestDemo = () => {
+    navigate('/demo#demo-request-form');
+  };
+
+  const handleContactUs = () => {
+    navigate('/contact');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -24,11 +37,9 @@ const Home: React.FC = () => {
                 Streamline administration, enhance learning experiences, and empower educational institutions with Acadeemia.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/demo" onClick={handleNavClick}>
-                  <Button variant="primary" size="lg">
-                    Request Demo
-                  </Button>
-                </Link>
+                <Button variant="primary" size="lg" onClick={handleRequestDemo}>
+                  Request Demo
+                </Button>
                 <Link to="/features" onClick={handleNavClick}>
                   <Button variant="outline" size="lg">
                     Explore Features
@@ -78,11 +89,9 @@ const Home: React.FC = () => {
                     Learn More
                   </Button>
                 </Link>
-                <Link to="/demo" className="flex-1" onClick={handleNavClick}>
-                  <Button variant="outline" fullWidth>
-                    Try Demo
-                  </Button>
-                </Link>
+                <Button variant="outline" fullWidth onClick={handleRequestDemo}>
+                  Try Demo
+                </Button>
               </div>
             </div>
 
@@ -108,11 +117,9 @@ const Home: React.FC = () => {
                     Learn More
                   </Button>
                 </Link>
-                <Link to="/demo" className="flex-1" onClick={handleNavClick}>
-                  <Button variant="outline" fullWidth>
-                    Try Demo
-                  </Button>
-                </Link>
+                <Button variant="outline" fullWidth onClick={handleRequestDemo}>
+                  Try Demo
+                </Button>
               </div>
             </div>
           </div>
@@ -223,24 +230,22 @@ const Home: React.FC = () => {
               Start your journey with Acadeemia today and experience the difference our system can make.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact" onClick={handleNavClick}>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Contact Sales
-                </Button>
-              </Link>
-              <Link to="/demo" onClick={handleNavClick}>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Request Demo
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleContactUs}
+              >
+                Contact Us
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleRequestDemo}
+              >
+                Request Demo
+              </Button>
             </div>
           </div>
         </div>
