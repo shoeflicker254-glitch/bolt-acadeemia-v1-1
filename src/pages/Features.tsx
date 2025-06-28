@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { 
   Users, BookOpen, BarChart, Calendar, Bell, FileText, 
   MessageSquare, Settings, Clock, Award, CheckSquare, Search,
@@ -11,6 +11,7 @@ import FeatureCard from '../components/ui/FeatureCard';
 import AddOnCard from '../components/ui/AddOnCard';
 
 const Features: React.FC = () => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeVersion, setActiveVersion] = useState<'saas' | 'standalone'>('saas');
   
@@ -22,6 +23,17 @@ const Features: React.FC = () => {
     { id: 'communication', label: 'Communication' },
     { id: 'addons', label: 'Add-Ons' }
   ];
+
+  const handleRequestDemo = () => {
+    navigate('/demo#demo-request-form');
+  };
+
+  const handleContactSales = () => {
+    navigate('/contact');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
 
   const saasModules = [
     { name: 'Alumni', category: 'core' },
@@ -278,24 +290,22 @@ const Features: React.FC = () => {
               See all these features in action with a personalized demo tailored to your institution's needs.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/demo">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Request Demo
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Contact Sales
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleRequestDemo}
+              >
+                Request Demo
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleContactSales}
+              >
+                Contact Sales
+              </Button>
             </div>
           </div>
         </div>

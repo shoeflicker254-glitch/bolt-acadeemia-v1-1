@@ -1,9 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Award, Users, Target, Heart, Check, Globe, Shield, Zap } from 'lucide-react';
 import Button from '../components/ui/Button';
 
 const About: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleRequestDemo = () => {
+    navigate('/demo#demo-request-form');
+  };
+
+  const handleContactUs = () => {
+    navigate('/contact');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <div className="pt-20 animate-fade-in">
       {/* Hero Section */}
@@ -357,24 +370,22 @@ const About: React.FC = () => {
               Discover how Acadeemia can transform your institution's management and empower your educational mission.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/demo">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Request Demo
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Contact Us
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleRequestDemo}
+              >
+                Request Demo
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleContactUs}
+              >
+                Contact Us
+              </Button>
             </div>
           </div>
         </div>

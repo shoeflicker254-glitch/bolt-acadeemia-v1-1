@@ -18,6 +18,17 @@ const Versions: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleRequestDemo = () => {
+    navigate('/demo#demo-request-form');
+  };
+
+  const handleContactUs = () => {
+    navigate('/contact');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <div className="pt-20 animate-fade-in">
       {/* Hero Section */}
@@ -266,11 +277,9 @@ const Versions: React.FC = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/demo" className="flex-1" onClick={handleNavClick}>
-                  <Button variant="secondary" fullWidth>
-                    Try Standalone Demo
-                  </Button>
-                </Link>
+                <Button variant="secondary" fullWidth onClick={handleRequestDemo}>
+                  Try Standalone Demo
+                </Button>
                 <div className="flex-1">
                   <Button variant="outline" fullWidth onClick={handleStandalonePricing}>
                     View Pricing
@@ -456,24 +465,22 @@ const Versions: React.FC = () => {
               Our experts can help assess your needs and recommend the best solution for your institution.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact" onClick={handleNavClick}>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Contact Sales
-                </Button>
-              </Link>
-              <Link to="/demo" onClick={handleNavClick}>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-primary hover:bg-white/10 hover:text-white"
-                >
-                  Request Demo
-                </Button>
-              </Link>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleContactUs}
+              >
+                Contact Sales
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-white text-primary hover:bg-white/10 hover:text-white"
+                onClick={handleRequestDemo}
+              >
+                Request Demo
+              </Button>
             </div>
           </div>
         </div>
