@@ -1,12 +1,18 @@
 {
   "name": "Acadeemia School Management System",
   "short_name": "Acadeemia",
-  "description": "The #1 Complete School Management Solution",
+  "description": "The #1 Complete School Management Solution. Streamline administration, enhance learning experiences, and empower educational institutions with Acadeemia.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#697BBC",
   "orientation": "portrait-primary",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "categories": ["education", "productivity", "business"],
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/icon-48x48.png",
@@ -53,12 +59,60 @@
     {
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "categories": ["education", "productivity", "business"],
-  "lang": "en",
-  "dir": "ltr",
-  "scope": "/",
-  "prefer_related_applications": false
+  "screenshots": [
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Request Demo",
+      "short_name": "Demo",
+      "description": "Request a personalized demo",
+      "url": "/demo",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with our team",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Pricing",
+      "short_name": "Pricing",
+      "description": "View our pricing plans",
+      "url": "/pricing",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
 }
