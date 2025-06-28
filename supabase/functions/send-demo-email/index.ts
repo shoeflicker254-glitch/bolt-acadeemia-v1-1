@@ -1,5 +1,3 @@
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -16,7 +14,7 @@ interface DemoFormData {
   message: string
 }
 
-serve(async (req) => {
+Deno.serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
@@ -31,6 +29,19 @@ serve(async (req) => {
         JSON.stringify({ error: 'Missing required fields' }),
         { 
           status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      )
+    }
+
+    // Get API key from environment variables
+    const brevoApiKey = Deno.env.get('BREVO_API_KEY')
+    if (!brevoApiKey) {
+      console.error('BREVO_API_KEY environment variable not set')
+      return new Response(
+        JSON.stringify({ error: 'Email service configuration error' }),
+        { 
+          status: 500, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
         }
       )
@@ -107,7 +118,7 @@ serve(async (req) => {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'api-key': '@12Ngolindo151994!'
+        'api-key': brevoApiKey
       },
       body: JSON.stringify({
         sender: {
