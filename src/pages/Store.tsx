@@ -69,7 +69,7 @@ const Store: React.FC = () => {
       id: 'standalone-android-app',
       name: 'Android App',
       description: 'Mobile access through dedicated Android application. Native mobile experience for students, teachers, and parents.',
-      price: 1999,
+      price: 3999,
       category: 'standalone',
       features: [
         'Native Android application',
