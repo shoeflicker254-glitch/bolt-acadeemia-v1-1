@@ -146,7 +146,7 @@ const Versions: React.FC = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="https://acadeemia.com/#pricing" target="_blank" className="flex-1">
+                <Link to="https://saas.acadeemia.com/#pricing" target="_blank" className="flex-1">
                   <Button variant="primary" fullWidth>
                     Start Free Trial
                   </Button>
