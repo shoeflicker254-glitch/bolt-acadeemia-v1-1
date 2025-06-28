@@ -5,9 +5,11 @@ import {
   Video, Book, Users, Zap, CheckCircle, AlertCircle, Search
 } from 'lucide-react';
 import Button from '../components/ui/Button';
+import EmailSupportModal from '../components/ui/EmailSupportModal';
 
 const Support: React.FC = () => {
   const [selectedTicketType, setSelectedTicketType] = useState('');
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [ticketForm, setTicketForm] = useState({
     name: '',
     email: '',
@@ -29,7 +31,9 @@ const Support: React.FC = () => {
       description: 'Get help via email with detailed responses',
       contact: 'support@acadeemia.com',
       responseTime: '24 hours',
-      availability: '24/7'
+      availability: '24/7',
+      buttonText: 'Send Email',
+      action: () => setIsEmailModalOpen(true)
     },
     {
       icon: <Phone size={24} />,
@@ -37,7 +41,9 @@ const Support: React.FC = () => {
       description: 'Speak directly with our support team',
       contact: '+254 111 313 818',
       responseTime: 'Immediate',
-      availability: 'Mon-Fri 7AM-5PM EAT'
+      availability: 'Mon-Fri 7AM-5PM EAT',
+      buttonText: 'Call Now',
+      action: () => window.open('tel:+254111313818')
     },
     {
       icon: <MessageSquare size={24} />,
@@ -45,7 +51,14 @@ const Support: React.FC = () => {
       description: 'Real-time chat support for quick questions',
       contact: 'Available on website',
       responseTime: '< 5 minutes',
-      availability: 'Mon-Fri 8AM-6PM EAT'
+      availability: 'Mon-Fri 8AM-6PM EAT',
+      buttonText: 'Start Chat',
+      action: () => {
+        // Trigger Tawk.to chat if available
+        if (window.Tawk_API) {
+          window.Tawk_API.toggle();
+        }
+      }
     }
   ];
 
@@ -150,9 +163,12 @@ const Support: React.FC = () => {
                   </div>
                 </div>
 
-                <Button variant="outline" fullWidth>
-                  {channel.title === 'Email Support' ? 'Send Email' : 
-                   channel.title === 'Phone Support' ? 'Call Now' : 'Start Chat'}
+                <Button 
+                  variant="outline" 
+                  fullWidth
+                  onClick={channel.action}
+                >
+                  {channel.buttonText}
                 </Button>
               </div>
             ))}
@@ -338,6 +354,12 @@ const Support: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Email Support Modal */}
+      <EmailSupportModal 
+        isOpen={isEmailModalOpen}
+        onClose={() => setIsEmailModalOpen(false)}
+      />
     </div>
   );
 };
