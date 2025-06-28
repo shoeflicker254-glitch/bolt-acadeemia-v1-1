@@ -89,7 +89,7 @@ const Home: React.FC = () => {
                     Learn More
                   </Button>
                 </Link>
-                <Button variant="outline" fullWidth onClick={handleRequestDemo}>
+                <Button variant="outline" fullWidth>
                   Try Demo
                 </Button>
               </div>
