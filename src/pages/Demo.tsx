@@ -1,7 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ExternalLink, Monitor, Server, ArrowRight, Calendar } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+
+// Declare Calendly types
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: {
+        url: string;
+        parentElement?: HTMLElement;
+        prefill?: Record<string, any>;
+        utm?: Record<string, any>;
+      }) => void;
+      closePopupWidget: () => void;
+    };
+  }
+}
 
 const Demo: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,11 +32,53 @@ const Demo: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [calendlyUrl, setCalendlyUrl] = useState('');
+  const [showCalendlyButton, setShowCalendlyButton] = useState(false);
+  
+  // Load Calendly widget script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup script on unmount
+      const existingScript = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const openCalendlyPopup = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/info-0rq/30min-demo-meeting',
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          customAnswers: {
+            a1: formData.institution, // Institution
+            a2: formData.role, // Role
+            a3: formData.version, // Version interested in
+            a4: formData.message // Additional notes
+          }
+        },
+        utm: {
+          utmCampaign: 'Demo Request',
+          utmSource: 'Website',
+          utmMedium: 'Form'
+        }
+      });
+    } else {
+      // Fallback to opening in new tab if Calendly widget fails to load
+      window.open('https://calendly.com/info-0rq/30min-demo-meeting', '_blank');
+    }
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,7 +103,7 @@ const Demo: React.FC = () => {
       }
 
       setSubmitSuccess(true);
-      setCalendlyUrl(result.calendlyUrl);
+      setShowCalendlyButton(true);
       setFormData({
         name: '',
         email: '',
@@ -57,11 +114,11 @@ const Demo: React.FC = () => {
         message: '',
       });
       
-      // Reset success message after 10 seconds
+      // Reset success message after 30 seconds to give time for scheduling
       setTimeout(() => {
         setSubmitSuccess(false);
-        setCalendlyUrl('');
-      }, 10000);
+        setShowCalendlyButton(false);
+      }, 30000);
     } catch (error) {
       console.error('Error sending demo request:', error);
       setSubmitError(error instanceof Error ? error.message : 'Failed to send demo request. Please try again.');
@@ -301,18 +358,20 @@ const Demo: React.FC = () => {
                 <p className="mb-4">
                   Your demo request has been received. One of our product specialists will contact you within 24 hours to schedule your personalized demonstration.
                 </p>
-                {calendlyUrl && (
+                {showCalendlyButton && (
                   <div className="bg-white p-4 rounded-lg border border-green-300">
-                    <p className="font-semibold mb-2">Schedule your demo meeting now:</p>
-                    <a 
-                      href={calendlyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+                    <p className="font-semibold mb-3">Schedule your demo meeting now:</p>
+                    <Button 
+                      variant="primary"
+                      icon={<Calendar size={18} />}
+                      onClick={openCalendlyPopup}
+                      className="w-full sm:w-auto"
                     >
-                      <Calendar size={18} className="mr-2" />
-                      Schedule 30-minute Demo Meeting
-                    </a>
+                      Book 30-minute Demo Meeting
+                    </Button>
+                    <p className="text-sm text-gray-600 mt-2">
+                      Click the button above to open our scheduling widget and pick a time that works for you.
+                    </p>
                   </div>
                 )}
               </div>
