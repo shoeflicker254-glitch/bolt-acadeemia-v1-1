@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Check, HelpCircle, Cloud, Server, Plus, AlertTriangle
 } from 'lucide-react';
@@ -8,6 +8,7 @@ import PricingCard from '../components/ui/PricingCard';
 
 const Pricing: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [billingPeriod, setBillingPeriod] = useState<'termly' | 'annual'>('annual');
   const [showAddOns, setShowAddOns] = useState(true);
   
@@ -21,7 +22,22 @@ const Pricing: React.FC = () => {
 
   const handleContactSales = () => {
     navigate('/contact');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
+
+  // Handle scrolling to specific sections based on hash
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location.hash]);
   
   // Calculate discounted prices for annual billing (10% discount)
   const getPrice = (termlyPrice: number) => {
@@ -385,7 +401,7 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* SaaS Pricing */}
-      <section className="section">
+      <section id="saas-pricing" className="section">
         <div className="container">
           <div className="flex items-center justify-center mb-12">
             <div className="p-3 bg-primary-50 rounded-full mr-3">
@@ -447,7 +463,7 @@ const Pricing: React.FC = () => {
       </section>
 
       {/* Standalone Pricing */}
-      <section className="section bg-gray-50">
+      <section id="standalone-pricing" className="section bg-gray-50">
         <div className="container">
           <div className="flex items-center justify-center mb-12">
             <div className="p-3 bg-secondary-50 rounded-full mr-3">
@@ -665,7 +681,7 @@ const Pricing: React.FC = () => {
               >
                 Contact Sales
               </Button>
-              <Link to="/demo">
+              <Link to="/demo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <Button 
                   variant="outline" 
                   size="lg"

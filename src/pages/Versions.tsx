@@ -1,9 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Cloud, Server, Check, AlertTriangle, X, Shield, Clock, Database, Users, Package, CreditCard, RefreshCw } from 'lucide-react';
 import Button from '../components/ui/Button';
 
 const Versions: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSaasPricing = () => {
+    navigate('/pricing#saas-pricing');
+  };
+
+  const handleStandalonePricing = () => {
+    navigate('/pricing#standalone-pricing');
+  };
+
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="pt-20 animate-fade-in">
       {/* Hero Section */}
@@ -137,11 +151,11 @@ const Versions: React.FC = () => {
                     Start Free Trial
                   </Button>
                 </Link>
-                <Link to="/pricing" className="flex-1">
-                  <Button variant="outline" fullWidth>
+                <div className="flex-1">
+                  <Button variant="outline" fullWidth onClick={handleSaasPricing}>
                     View Pricing
                   </Button>
-                </Link>
+                </div>
               </div>
             </div>
             
@@ -252,16 +266,16 @@ const Versions: React.FC = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/demo" className="flex-1">
+                <Link to="/demo" className="flex-1" onClick={handleNavClick}>
                   <Button variant="secondary" fullWidth>
                     Try Standalone Demo
                   </Button>
                 </Link>
-                <Link to="/pricing" className="flex-1">
-                  <Button variant="outline" fullWidth>
+                <div className="flex-1">
+                  <Button variant="outline" fullWidth onClick={handleStandalonePricing}>
                     View Pricing
                   </Button>
-                </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -442,7 +456,7 @@ const Versions: React.FC = () => {
               Our experts can help assess your needs and recommend the best solution for your institution.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact">
+              <Link to="/contact" onClick={handleNavClick}>
                 <Button 
                   variant="outline" 
                   size="lg"
@@ -451,7 +465,7 @@ const Versions: React.FC = () => {
                   Contact Sales
                 </Button>
               </Link>
-              <Link to="/demo">
+              <Link to="/demo" onClick={handleNavClick}>
                 <Button 
                   variant="outline" 
                   size="lg"
