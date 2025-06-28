@@ -124,6 +124,7 @@ const Store: React.FC = () => {
         'Continuous assessment tracking',
         'Board exam preparation tools'
       ],
+      popular: true,
       icon: <Package size={24} />
     },
     {
