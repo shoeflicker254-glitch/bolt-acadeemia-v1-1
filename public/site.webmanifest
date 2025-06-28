@@ -1,6 +1,13 @@
 {
   "name": "Acadeemia School Management System",
   "short_name": "Acadeemia",
+  "description": "The #1 Complete School Management Solution",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#697BBC",
+  "orientation": "portrait-primary",
+  "scope": "/",
   "icons": [
     {
       "src": "/icon-48x48.png",
@@ -37,8 +44,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#697BBC",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  ]
 }
