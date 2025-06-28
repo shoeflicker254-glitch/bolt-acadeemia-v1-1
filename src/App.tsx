@@ -13,6 +13,7 @@ import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import FAQ from './pages/FAQ';
 import Support from './pages/Support';
+import Store from './pages/Store';
 import TawkChat from './components/ui/TawkChat';
 import CookieConsent from './components/ui/CookieConsent';
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
@@ -35,6 +36,7 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/store" element={<Store />} />
           </Routes>
         </main>
         <Footer />
