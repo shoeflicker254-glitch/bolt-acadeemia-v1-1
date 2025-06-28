@@ -62,6 +62,7 @@ const Store: React.FC = () => {
         'Admin controls for 2FA enforcement',
         'Security audit logs'
       ],
+      popular: true,
       icon: <Shield size={24} />
     },
     // Standalone Add-ons
@@ -156,6 +157,7 @@ const Store: React.FC = () => {
         'Inter-branch data sharing',
         'Branch performance analytics'
       ],
+      popular: true,
       icon: <Package size={24} />
     },
     {
@@ -186,6 +188,7 @@ const Store: React.FC = () => {
         'Attendance analytics',
         'Parent notifications'
       ],
+      popular: true,
       icon: <Package size={24} />
     },
     {
@@ -231,6 +234,7 @@ const Store: React.FC = () => {
         'Admin security controls',
         'Security audit logs'
       ],
+      popular: true,
       icon: <Shield size={24} />
     },
     {
@@ -246,6 +250,7 @@ const Store: React.FC = () => {
         'Breakout room support',
         'Attendance tracking'
       ],
+      popular: true,
       icon: <Package size={24} />
     }
   ];
