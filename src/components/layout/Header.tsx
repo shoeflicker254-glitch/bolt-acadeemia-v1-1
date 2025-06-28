@@ -95,6 +95,15 @@ const Header: React.FC = () => {
             Pricing
           </Link>
           <Link 
+            to="/store" 
+            className={`font-medium transition-colors hover:text-primary-600 ${
+              isActive('/store') ? 'text-primary-600' : 'text-gray-700'
+            }`}
+            onClick={handleNavClick}
+          >
+            Store
+          </Link>
+          <Link 
             to="/about" 
             className={`font-medium transition-colors hover:text-primary-600 ${
               isActive('/about') ? 'text-primary-600' : 'text-gray-700'
@@ -166,6 +175,15 @@ const Header: React.FC = () => {
               onClick={handleNavClick}
             >
               Pricing
+            </Link>
+            <Link 
+              to="/store" 
+              className={`font-medium p-2 rounded-lg transition-colors ${
+                isActive('/store') ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+              onClick={handleNavClick}
+            >
+              Store
             </Link>
             <Link 
               to="/about" 

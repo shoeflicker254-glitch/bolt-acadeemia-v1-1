@@ -65,6 +65,11 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/store" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavClick}>
+                  Store
+                </Link>
+              </li>
+              <li>
                 <Link to="/about" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavClick}>
                   About Us
                 </Link>
