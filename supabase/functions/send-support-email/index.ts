@@ -6,6 +6,7 @@ const corsHeaders = {
 
 interface SupportFormData {
   senderName: string
+  senderEmail: string
   subject: string
   supportType: string
   message: string
@@ -18,12 +19,24 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { senderName, subject, supportType, message }: SupportFormData = await req.json()
+    const { senderName, senderEmail, subject, supportType, message }: SupportFormData = await req.json()
 
     // Validate required fields
-    if (!senderName || !subject || !supportType || !message) {
+    if (!senderName || !senderEmail || !subject || !supportType || !message) {
       return new Response(
         JSON.stringify({ error: 'Missing required fields' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      )
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(senderEmail)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid email format' }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -89,6 +102,11 @@ Deno.serve(async (req) => {
             </div>
             
             <div class="field">
+                <div class="label">Sender Email:</div>
+                <div class="value">${senderEmail}</div>
+            </div>
+            
+            <div class="field">
                 <div class="label">Subject:</div>
                 <div class="value">${subject}</div>
             </div>
@@ -107,6 +125,7 @@ Deno.serve(async (req) => {
                 <h4 style="margin-top: 0; color: #0c4a6e;">Next Steps:</h4>
                 <ul style="margin-bottom: 0;">
                     <li>This ticket has been assigned to our support team</li>
+                    <li>Response will be sent to: <strong>${senderEmail}</strong></li>
                     <li>Response time: Within 24 hours during business days</li>
                     <li>For urgent issues, call +254 111 313 818</li>
                 </ul>
@@ -137,8 +156,8 @@ Deno.serve(async (req) => {
           }
         ],
         replyTo: {
-          email: 'support@acadeemia.com',
-          name: 'Acadeemia Support'
+          email: senderEmail,
+          name: senderName
         },
         subject: `[${ticketNumber}] ${supportType}: ${subject}`,
         htmlContent: emailContent
