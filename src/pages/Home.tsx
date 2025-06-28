@@ -5,6 +5,10 @@ import Button from '../components/ui/Button';
 import FeatureCard from '../components/ui/FeatureCard';
 
 const Home: React.FC = () => {
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
@@ -20,12 +24,12 @@ const Home: React.FC = () => {
                 Streamline administration, enhance learning experiences, and empower educational institutions with Acadeemia.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/demo">
+                <Link to="/demo" onClick={handleNavClick}>
                   <Button variant="primary" size="lg">
                     Request Demo
                   </Button>
                 </Link>
-                <Link to="/features">
+                <Link to="/features" onClick={handleNavClick}>
                   <Button variant="outline" size="lg">
                     Explore Features
                   </Button>
@@ -69,12 +73,12 @@ const Home: React.FC = () => {
                 ))}
               </ul>
               <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                <Link to="/versions" className="flex-1">
+                <Link to="/versions" className="flex-1" onClick={handleNavClick}>
                   <Button variant="primary" fullWidth>
                     Learn More
                   </Button>
                 </Link>
-                <Link to="/demo" className="flex-1">
+                <Link to="/demo" className="flex-1" onClick={handleNavClick}>
                   <Button variant="outline" fullWidth>
                     Try Demo
                   </Button>
@@ -99,12 +103,12 @@ const Home: React.FC = () => {
                 ))}
               </ul>
               <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                <Link to="/versions" className="flex-1">
+                <Link to="/versions" className="flex-1" onClick={handleNavClick}>
                   <Button variant="secondary" fullWidth>
                     Learn More
                   </Button>
                 </Link>
-                <Link to="/demo" className="flex-1">
+                <Link to="/demo" className="flex-1" onClick={handleNavClick}>
                   <Button variant="outline" fullWidth>
                     Try Demo
                   </Button>
@@ -158,7 +162,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Link to="/features">
+            <Link to="/features" onClick={handleNavClick}>
               <Button variant="primary" size="lg" icon={<ArrowRight size={18} />}>
                 Explore All Features
               </Button>
@@ -219,7 +223,7 @@ const Home: React.FC = () => {
               Start your journey with Acadeemia today and experience the difference our system can make.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact">
+              <Link to="/contact" onClick={handleNavClick}>
                 <Button 
                   variant="outline" 
                   size="lg"
@@ -228,7 +232,7 @@ const Home: React.FC = () => {
                   Contact Sales
                 </Button>
               </Link>
-              <Link to="/demo">
+              <Link to="/demo" onClick={handleNavClick}>
                 <Button 
                   variant="outline" 
                   size="lg"
