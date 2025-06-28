@@ -1,3 +1,5 @@
+import { createClient } from 'npm:@supabase/supabase-js@2'
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -44,13 +46,31 @@ Deno.serve(async (req) => {
       )
     }
 
-    // MailerSend API configuration - use environment variable
-    const mailersendApiKey = Deno.env.get('MAILERSEND_API_KEY')
-    
-    if (!mailersendApiKey) {
-      console.error('MAILERSEND_API_KEY environment variable is not set')
+    // Generate ticket number
+    const ticketNumber = `SUP-${Date.now()}-${Math.random().toString(36).substr(2, 5).toUpperCase()}`
+
+    // Initialize Supabase client
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+    const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+    // Store support request in database
+    const { error: dbError } = await supabase
+      .from('email_support_requests')
+      .insert({
+        sender_name: senderName,
+        sender_email: senderEmail,
+        subject: subject,
+        support_type: supportType,
+        message: message,
+        ticket_number: ticketNumber,
+        status: 'pending'
+      })
+
+    if (dbError) {
+      console.error('Database error:', dbError)
       return new Response(
-        JSON.stringify({ error: 'Email service configuration error' }),
+        JSON.stringify({ error: 'Failed to save support request' }),
         { 
           status: 500, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -58,11 +78,15 @@ Deno.serve(async (req) => {
       )
     }
 
-    // Generate ticket number
-    const ticketNumber = `SUP-${Date.now()}-${Math.random().toString(36).substr(2, 5).toUpperCase()}`
+    // Try to send email if MailerSend API key is available
+    const mailersendApiKey = Deno.env.get('MAILERSEND_API_KEY')
+    let emailSent = false
+    let emailError = null
 
-    // Email content
-    const emailContent = `
+    if (mailersendApiKey) {
+      try {
+        // Email content
+        const emailContent = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,48 +159,65 @@ Deno.serve(async (req) => {
     </div>
 </body>
 </html>
-    `
+        `
 
-    // Send email using MailerSend
-    const response = await fetch('https://api.mailersend.com/v1/email', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${mailersendApiKey}`,
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      },
-      body: JSON.stringify({
-        from: {
-          email: 'noreply@acadeemia.com',
-          name: 'Acadeemia Support'
-        },
-        to: [
-          {
-            email: 'support@acadeemia.com',
-            name: 'Acadeemia Support Team'
-          }
-        ],
-        reply_to: {
-          email: senderEmail,
-          name: senderName
-        },
-        subject: `[${ticketNumber}] ${supportType}: ${subject}`,
-        html: emailContent,
-        text: `Support Request - Ticket #${ticketNumber}\n\nSender: ${senderName} (${senderEmail})\nSupport Type: ${supportType}\nSubject: ${subject}\nMessage: ${message}\n\nSubmitted: ${new Date().toLocaleString()}`
-      })
-    })
+        // Send email using MailerSend
+        const response = await fetch('https://api.mailersend.com/v1/email', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${mailersendApiKey}`,
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify({
+            from: {
+              email: 'noreply@acadeemia.com',
+              name: 'Acadeemia Support'
+            },
+            to: [
+              {
+                email: 'support@acadeemia.com',
+                name: 'Acadeemia Support Team'
+              }
+            ],
+            reply_to: {
+              email: senderEmail,
+              name: senderName
+            },
+            subject: `[${ticketNumber}] ${supportType}: ${subject}`,
+            html: emailContent,
+            text: `Support Request - Ticket #${ticketNumber}\n\nSender: ${senderName} (${senderEmail})\nSupport Type: ${supportType}\nSubject: ${subject}\nMessage: ${message}\n\nSubmitted: ${new Date().toLocaleString()}`
+          })
+        })
 
-    if (!response.ok) {
-      const errorData = await response.text()
-      console.error('Email sending failed:', errorData)
-      throw new Error('Failed to send email')
+        if (response.ok) {
+          emailSent = true
+          console.log('Email sent successfully via MailerSend')
+        } else {
+          const errorData = await response.text()
+          emailError = `MailerSend API error: ${errorData}`
+          console.error('Email sending failed:', errorData)
+        }
+      } catch (error) {
+        emailError = `Email sending error: ${error.message}`
+        console.error('Email sending error:', error)
+      }
+    } else {
+      console.log('MAILERSEND_API_KEY not configured, skipping email send')
     }
+
+    // Return success response regardless of email status
+    const responseMessage = emailSent 
+      ? 'Support request submitted and email sent successfully'
+      : 'Support request submitted successfully. Our team will review it and contact you via email.'
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'Support email sent successfully',
-        ticketNumber: ticketNumber
+        message: responseMessage,
+        ticketNumber: ticketNumber,
+        emailSent: emailSent,
+        emailError: emailError
       }),
       { 
         status: 200, 
@@ -187,7 +228,7 @@ Deno.serve(async (req) => {
   } catch (error) {
     console.error('Error:', error)
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
+      JSON.stringify({ error: 'Internal server error', details: error.message }),
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, Mail } from 'lucide-react';
+import { X, Send, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import Button from './Button';
 
 interface EmailSupportModalProps {
@@ -19,6 +19,8 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [ticketNumber, setTicketNumber] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
 
   const supportTypes = [
     'Technical Issue',
@@ -54,10 +56,12 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to send email');
+        throw new Error(result.error || 'Failed to submit support request');
       }
 
       setSubmitSuccess(true);
+      setTicketNumber(result.ticketNumber || '');
+      setEmailSent(result.emailSent || false);
       setFormData({
         senderName: '',
         senderEmail: '',
@@ -66,14 +70,16 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
         message: ''
       });
 
-      // Close modal after 3 seconds
+      // Close modal after 5 seconds
       setTimeout(() => {
         setSubmitSuccess(false);
+        setTicketNumber('');
+        setEmailSent(false);
         onClose();
-      }, 3000);
+      }, 5000);
     } catch (error) {
-      console.error('Error sending email:', error);
-      setSubmitError(error instanceof Error ? error.message : 'Failed to send email. Please try again.');
+      console.error('Error submitting support request:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit support request. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -90,6 +96,8 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
       });
       setSubmitError('');
       setSubmitSuccess(false);
+      setTicketNumber('');
+      setEmailSent(false);
       onClose();
     }
   };
@@ -121,17 +129,30 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
           {submitSuccess && (
             <div className="bg-green-50 p-4 rounded-lg border border-green-200 text-green-800 mb-6 animate-fade-in">
               <div className="flex items-center">
-                <Send size={20} className="mr-2" />
-                <span className="font-medium">Email sent successfully!</span>
+                <CheckCircle size={20} className="mr-2" />
+                <span className="font-medium">Support request submitted successfully!</span>
               </div>
-              <p className="mt-1 text-sm">Our support team will get back to you within 24 hours.</p>
+              {ticketNumber && (
+                <p className="mt-1 text-sm">
+                  <strong>Ticket Number:</strong> {ticketNumber}
+                </p>
+              )}
+              <p className="mt-1 text-sm">
+                {emailSent 
+                  ? "Our support team has been notified and will get back to you within 24 hours."
+                  : "Your request has been saved and our team will review it and contact you via email."
+                }
+              </p>
             </div>
           )}
 
           {/* Error Message */}
           {submitError && (
             <div className="bg-red-50 p-4 rounded-lg border border-red-200 text-red-800 mb-6 animate-fade-in">
-              <p className="font-medium">Error sending email</p>
+              <div className="flex items-center">
+                <AlertCircle size={20} className="mr-2" />
+                <span className="font-medium">Error submitting support request</span>
+              </div>
               <p className="text-sm mt-1">{submitError}</p>
             </div>
           )}
@@ -233,9 +254,9 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
             <div className="bg-gray-50 p-4 rounded-lg">
               <h4 className="font-medium text-gray-900 mb-2">What happens next?</h4>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• Your email will be sent directly to our support team</li>
-                <li>• You'll receive a confirmation email with a ticket number</li>
-                <li>• Our team will respond to your email address within 24 hours</li>
+                <li>• Your support request will be saved with a unique ticket number</li>
+                <li>• Our support team will be notified immediately</li>
+                <li>• You'll receive a response to your email address within 24 hours</li>
                 <li>• For urgent issues, please call +254 111 313 818</li>
               </ul>
             </div>
@@ -248,7 +269,7 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
                 disabled={isSubmitting}
                 className="flex-1"
               >
-                {isSubmitting ? 'Sending...' : 'Send Email'}
+                {isSubmitting ? 'Submitting...' : 'Submit Request'}
               </Button>
               <Button
                 type="button"
