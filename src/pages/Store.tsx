@@ -78,6 +78,7 @@ const Store: React.FC = () => {
         'Mobile-optimized interface',
         'App store deployment assistance'
       ],
+      popular: true,
       icon: <Package size={24} />
     },
     {
