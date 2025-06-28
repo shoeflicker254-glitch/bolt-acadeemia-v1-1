@@ -15,6 +15,7 @@ import FAQ from './pages/FAQ';
 import Support from './pages/Support';
 import TawkChat from './components/ui/TawkChat';
 import CookieConsent from './components/ui/CookieConsent';
+import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Footer />
         <TawkChat />
         <CookieConsent />
+        <PWAInstallPrompt />
       </div>
     </Router>
   );

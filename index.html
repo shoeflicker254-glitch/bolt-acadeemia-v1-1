@@ -31,6 +31,11 @@
     <meta name="msapplication-TileColor" content="#697BBC" />
     <meta name="msapplication-config" content="/browserconfig.xml" />
     
+    <!-- Additional PWA Meta Tags -->
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="The #1 Complete School Management Solution. Streamline administration, enhance learning experiences, and empower educational institutions with Acadeemia." />
     <meta name="keywords" content="school management, education software, student management, academic management, school administration" />
@@ -62,12 +67,39 @@
           navigator.serviceWorker.register('/sw.js')
             .then((registration) => {
               console.log('SW registered: ', registration);
+              
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // New content is available, show update notification
+                      console.log('New content is available; please refresh.');
+                    }
+                  });
+                }
+              });
             })
             .catch((registrationError) => {
               console.log('SW registration failed: ', registrationError);
             });
         });
       }
+
+      // Handle PWA install prompt
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('beforeinstallprompt event fired');
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      // Track PWA installation
+      window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
+        deferredPrompt = null;
+      });
     </script>
   </body>
 </html>
