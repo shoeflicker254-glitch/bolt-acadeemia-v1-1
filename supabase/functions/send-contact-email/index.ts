@@ -31,8 +31,19 @@ Deno.serve(async (req) => {
       )
     }
 
-    // MailerSend API configuration
-    const mailersendApiKey = 'mlsn.99daf7a785db0c88cbcc15a914335ee30ef0e977383d07bf0c93b5ac9d81994a'
+    // MailerSend API configuration - use environment variable
+    const mailersendApiKey = Deno.env.get('MAILERSEND_API_KEY')
+    
+    if (!mailersendApiKey) {
+      console.error('MAILERSEND_API_KEY environment variable is not set')
+      return new Response(
+        JSON.stringify({ error: 'Email service configuration error' }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      )
+    }
 
     // Email content
     const emailContent = `
