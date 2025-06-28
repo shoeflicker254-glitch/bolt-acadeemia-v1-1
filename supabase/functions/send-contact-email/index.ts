@@ -31,18 +31,8 @@ Deno.serve(async (req) => {
       )
     }
 
-    // Get API key from environment variables
-    const brevoApiKey = Deno.env.get('BREVO_API_KEY')
-    if (!brevoApiKey) {
-      console.error('BREVO_API_KEY environment variable not set')
-      return new Response(
-        JSON.stringify({ error: 'Email service configuration error' }),
-        { 
-          status: 500, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-        }
-      )
-    }
+    // MailerSend API configuration
+    const mailersendApiKey = 'mlsn.99daf7a785db0c88cbcc15a914335ee30ef0e977383d07bf0c93b5ac9d81994a'
 
     // Email content
     const emailContent = `
@@ -89,18 +79,18 @@ Deno.serve(async (req) => {
 </html>
     `
 
-    // Send email using SMTP
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+    // Send email using MailerSend
+    const response = await fetch('https://api.mailersend.com/v1/email', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        'Authorization': `Bearer ${mailersendApiKey}`,
         'Content-Type': 'application/json',
-        'api-key': brevoApiKey
+        'X-Requested-With': 'XMLHttpRequest'
       },
       body: JSON.stringify({
-        sender: {
-          name: name,
-          email: 'noreply@acadeemia.com'
+        from: {
+          email: 'noreply@acadeemia.com',
+          name: 'Acadeemia Support'
         },
         to: [
           {
@@ -108,12 +98,13 @@ Deno.serve(async (req) => {
             name: 'Acadeemia Support'
           }
         ],
-        replyTo: {
+        reply_to: {
           email: email,
           name: name
         },
         subject: subject,
-        htmlContent: emailContent
+        html: emailContent,
+        text: `Contact Form Submission\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`
       })
     })
 
