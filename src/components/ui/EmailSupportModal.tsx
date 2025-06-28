@@ -10,6 +10,7 @@ interface EmailSupportModalProps {
 const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     senderName: '',
+    senderEmail: '',
     subject: '',
     supportType: '',
     message: ''
@@ -59,6 +60,7 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
       setSubmitSuccess(true);
       setFormData({
         senderName: '',
+        senderEmail: '',
         subject: '',
         supportType: '',
         message: ''
@@ -81,6 +83,7 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
     if (!isSubmitting) {
       setFormData({
         senderName: '',
+        senderEmail: '',
         subject: '',
         supportType: '',
         message: ''
@@ -154,6 +157,25 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
               </div>
 
               <div>
+                <label htmlFor="senderEmail" className="block text-sm font-medium text-gray-700 mb-1">
+                  Your Email *
+                </label>
+                <input
+                  id="senderEmail"
+                  name="senderEmail"
+                  type="email"
+                  required
+                  value={formData.senderEmail}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 disabled:opacity-50"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
                 <label htmlFor="supportType" className="block text-sm font-medium text-gray-700 mb-1">
                   Support Type *
                 </label>
@@ -172,23 +194,23 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
                   ))}
                 </select>
               </div>
-            </div>
 
-            <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                Subject *
-              </label>
-              <input
-                id="subject"
-                name="subject"
-                type="text"
-                required
-                value={formData.subject}
-                onChange={handleChange}
-                disabled={isSubmitting}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 disabled:opacity-50"
-                placeholder="Brief description of your issue"
-              />
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                  Subject *
+                </label>
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  required
+                  value={formData.subject}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 disabled:opacity-50"
+                  placeholder="Brief description of your issue"
+                />
+              </div>
             </div>
 
             <div>
@@ -213,7 +235,7 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>• Your email will be sent directly to our support team</li>
                 <li>• You'll receive a confirmation email with a ticket number</li>
-                <li>• Our team will respond within 24 hours during business days</li>
+                <li>• Our team will respond to your email address within 24 hours</li>
                 <li>• For urgent issues, please call +254 111 313 818</li>
               </ul>
             </div>
