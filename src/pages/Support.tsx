@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HelpCircle, MessageSquare, Phone, Mail, Clock, FileText, 
-  Video, Book, Users, Zap, CheckCircle, AlertCircle, Search
+  Video, Book, Users, Zap, CheckCircle, AlertCircle, Search, X
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import EmailSupportModal from '../components/ui/EmailSupportModal';
@@ -24,6 +24,7 @@ declare global {
 const Support: React.FC = () => {
   const [selectedTicketType, setSelectedTicketType] = useState('');
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [showCallModal, setShowCallModal] = useState(false);
   const [ticketForm, setTicketForm] = useState({
     name: '',
     email: '',
@@ -62,6 +63,19 @@ const Support: React.FC = () => {
     }
   };
 
+  const handleCallNow = () => {
+    // Check if user is on mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // For mobile users, directly open the phone dialer
+      window.location.href = 'tel:+254111313818';
+    } else {
+      // For web users, show a modal with call instructions
+      setShowCallModal(true);
+    }
+  };
+
   const supportChannels = [
     {
       icon: <Mail size={24} />,
@@ -81,7 +95,7 @@ const Support: React.FC = () => {
       responseTime: 'Immediate',
       availability: 'Mon-Fri 7AM-5PM EAT',
       buttonText: 'Call Now',
-      action: () => window.open('tel:+254111313818')
+      action: handleCallNow
     },
     {
       icon: <MessageSquare size={24} />,
@@ -387,6 +401,75 @@ const Support: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Call Instructions Modal */}
+      {showCallModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 animate-fade-in">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-primary-50 rounded-lg mr-3">
+                    <Phone size={24} className="text-primary-600" />
+                  </div>
+                  <h2 className="text-xl font-bold text-gray-900">Call Our Support Team</h2>
+                </div>
+                <button
+                  onClick={() => setShowCallModal(false)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="text-center">
+                <div className="bg-gray-50 p-6 rounded-lg mb-6">
+                  <h3 className="text-2xl font-bold text-primary-600 mb-2">+254 111 313 818</h3>
+                  <p className="text-gray-600">Acadeemia Support Line</p>
+                </div>
+
+                <div className="text-left space-y-4 mb-6">
+                  <h4 className="font-semibold text-gray-900">How to call:</h4>
+                  <ol className="list-decimal list-inside space-y-2 text-gray-700">
+                    <li>Dial the number above on your phone</li>
+                    <li>Wait for our support team to answer</li>
+                    <li>Have your account information ready</li>
+                    <li>Describe your issue clearly</li>
+                  </ol>
+                </div>
+
+                <div className="bg-blue-50 p-4 rounded-lg mb-6">
+                  <h4 className="font-semibold text-blue-900 mb-2">Support Hours</h4>
+                  <p className="text-blue-800 text-sm">
+                    Monday - Friday: 7:00 AM - 5:00 PM (EAT)<br />
+                    For urgent issues outside business hours, please send an email.
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    variant="primary"
+                    fullWidth
+                    onClick={() => setShowCallModal(false)}
+                  >
+                    Got It
+                  </Button>
+                  <Button
+                    variant="outline"
+                    fullWidth
+                    onClick={() => {
+                      setShowCallModal(false);
+                      setIsEmailModalOpen(true);
+                    }}
+                  >
+                    Send Email Instead
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Email Support Modal */}
       <EmailSupportModal 
