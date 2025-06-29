@@ -20,6 +20,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import DashboardLayout from './components/dashboard/DashboardLayout';
 import DashboardHome from './components/dashboard/DashboardHome';
 import ProfilePage from './components/dashboard/ProfilePage';
+import CMSManager from './components/cms/CMSManager';
 import TawkChat from './components/ui/TawkChat';
 import CookieConsent from './components/ui/CookieConsent';
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
@@ -124,6 +125,11 @@ function App() {
                   <h1 className="text-2xl font-bold">Super Admin Panel</h1>
                   <p className="text-gray-600">Manage all system operations from here.</p>
                 </div>
+              </ProtectedRoute>
+            } />
+            <Route path="cms" element={
+              <ProtectedRoute requiredRole={['super_admin']}>
+                <CMSManager />
               </ProtectedRoute>
             } />
             <Route path="schools" element={
