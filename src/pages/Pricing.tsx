@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
-  Check, HelpCircle, Cloud, Server, Plus, AlertTriangle
+  Check, HelpCircle, Cloud, Server, Plus, AlertTriangle, ShoppingCart
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import PricingCard from '../components/ui/PricingCard';
@@ -27,7 +27,18 @@ const Pricing: React.FC = () => {
     }, 100);
   };
 
-  // Handle scrolling to specific sections based on hash
+  const handleBuyAddon = (addonName: string, price: number) => {
+    // Navigate to store with the specific addon
+    navigate('/store', { 
+      state: { 
+        selectedAddon: addonName,
+        price: price,
+        fromPricing: true 
+      } 
+    });
+  };
+
+  // Handle URL hash for category filtering
   useEffect(() => {
     if (location.hash) {
       const element = document.getElementById(location.hash.substring(1));
@@ -557,6 +568,7 @@ const Pricing: React.FC = () => {
                         Termly Cost
                         <span className="ml-2 text-sm font-normal text-gray-500">(per institution)</span>
                       </th>
+                      <th className="px-6 py-4 text-center text-gray-700 font-semibold">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -565,6 +577,16 @@ const Pricing: React.FC = () => {
                         <td className="px-6 py-4 font-medium">{saasaddon.name}</td>
                         <td className="px-6 py-4 text-gray-600">{saasaddon.description}</td>
                         <td className="px-6 py-4 text-right font-medium">KES {saasaddon.price.toLocaleString()}/term</td>
+                        <td className="px-6 py-4 text-center">
+                          <Button
+                            variant="primary"
+                            size="sm"
+                            icon={<ShoppingCart size={16} />}
+                            onClick={() => handleBuyAddon(saasaddon.name, saasaddon.price)}
+                          >
+                            Buy Now
+                          </Button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -581,6 +603,7 @@ const Pricing: React.FC = () => {
                         Termly Cost
                         <span className="ml-2 text-sm font-normal text-gray-500">(per institution)</span>
                       </th>
+                      <th className="px-6 py-4 text-center text-gray-700 font-semibold">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -589,6 +612,16 @@ const Pricing: React.FC = () => {
                         <td className="px-6 py-4 font-medium">{standaloneaddon.name}</td>
                         <td className="px-6 py-4 text-gray-600">{standaloneaddon.description}</td>
                         <td className="px-6 py-4 text-right font-medium">KES {standaloneaddon.price.toLocaleString()}/term</td>
+                        <td className="px-6 py-4 text-center">
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            icon={<ShoppingCart size={16} />}
+                            onClick={() => handleBuyAddon(standaloneaddon.name, standaloneaddon.price)}
+                          >
+                            Buy Now
+                          </Button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -603,6 +636,7 @@ const Pricing: React.FC = () => {
                       <th className="px-6 py-4 text-left text-gray-700 font-semibold">Service</th>
                       <th className="px-6 py-4 text-left text-gray-700 font-semibold">Details</th>
                       <th className="px-6 py-4 text-right text-gray-700 font-semibold">Cost</th>
+                      <th className="px-6 py-4 text-center text-gray-700 font-semibold">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -612,6 +646,15 @@ const Pricing: React.FC = () => {
                         <td className="px-6 py-4 text-gray-600">{service.description}</td>
                         <td className="px-6 py-4 text-right font-medium">
                           KES {service.price.toLocaleString()}/{service.unit}
+                        </td>
+                        <td className="px-6 py-4 text-center">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleContactSales}
+                          >
+                            Contact Sales
+                          </Button>
                         </td>
                       </tr>
                     ))}
