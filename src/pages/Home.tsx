@@ -114,7 +114,7 @@ const Home: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                 <Link to="/versions" className="flex-1" onClick={handleNavClick}>
                   <Button variant="secondary" fullWidth>
-                    More
+                    Learn More
                   </Button>
                 </Link>
                 <Button variant="outline" fullWidth onClick={handleRequestDemo}>
