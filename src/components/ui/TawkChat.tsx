@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 declare global {
   interface Window {
@@ -8,23 +8,8 @@ declare global {
 }
 
 const TawkChat: React.FC = () => {
-  useEffect(() => {
-    const s1 = document.createElement("script");
-    const s0 = document.getElementsByTagName("script")[0];
-    
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/6675ca039d7f358570d2188d/1i0u1q7vk';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    
-    if (s0 && s0.parentNode) {
-      s0.parentNode.insertBefore(s1, s0);
-    }
-    
-    window.Tawk_API = window.Tawk_API || {};
-    window.Tawk_LoadStart = new Date();
-  }, []);
-
+  // Tawk.to script is now loaded directly in index.html
+  // This component serves as a placeholder for future chat customizations
   return null;
 };
 
