@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { 
   Menu, X, LogOut, User, Settings, Home, Users, BookOpen, 
   BarChart, Calendar, Bell, FileText, Package, CreditCard,
-  Shield, Database, School, UserCheck, GraduationCap, Edit
+  Shield, Database, School, UserCheck, GraduationCap
 } from 'lucide-react';
 import Button from '../ui/Button';
 
@@ -28,7 +28,6 @@ const DashboardLayout: React.FC = () => {
       return [
         ...baseItems,
         { icon: <Shield size={20} />, label: 'Super Admin', path: '/dashboard/super-admin' },
-        { icon: <Edit size={20} />, label: 'CMS Manager', path: '/dashboard/cms' },
         { icon: <School size={20} />, label: 'Schools', path: '/dashboard/schools' },
         { icon: <Users size={20} />, label: 'Users', path: '/dashboard/users' },
         { icon: <CreditCard size={20} />, label: 'Subscriptions', path: '/dashboard/subscriptions' },
