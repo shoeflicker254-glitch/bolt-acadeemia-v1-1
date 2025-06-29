@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, LogIn } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import Button from '../ui/Button';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -17,6 +20,14 @@ const Header: React.FC = () => {
   const handleNavClick = () => {
     closeMenu();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
+  const handleDashboardClick = () => {
+    navigate('/dashboard');
   };
 
   useEffect(() => {
@@ -112,13 +123,25 @@ const Header: React.FC = () => {
           >
             About
           </Link>
-          <Link 
-            to="/contact" 
-            className="btn-primary"
-            onClick={handleNavClick}
-          >
-            Contact Us
-          </Link>
+          
+          {user ? (
+            <Button variant="primary" onClick={handleDashboardClick}>
+              Dashboard
+            </Button>
+          ) : (
+            <>
+              <Link 
+                to="/contact" 
+                className="btn-outline"
+                onClick={handleNavClick}
+              >
+                Contact Us
+              </Link>
+              <Button variant="primary" onClick={handleLoginClick} icon={<LogIn size={18} />}>
+                Login
+              </Button>
+            </>
+          )}
         </nav>
 
         {/* Mobile menu button */}
@@ -194,13 +217,25 @@ const Header: React.FC = () => {
             >
               About
             </Link>
-            <Link 
-              to="/contact" 
-              className="btn-primary text-center"
-              onClick={handleNavClick}
-            >
-              Contact Us
-            </Link>
+            
+            {user ? (
+              <Button variant="primary" fullWidth onClick={handleDashboardClick}>
+                Dashboard
+              </Button>
+            ) : (
+              <>
+                <Link 
+                  to="/contact" 
+                  className="btn-outline text-center"
+                  onClick={handleNavClick}
+                >
+                  Contact Us
+                </Link>
+                <Button variant="primary" fullWidth onClick={handleLoginClick} icon={<LogIn size={18} />}>
+                  Login
+                </Button>
+              </>
+            )}
           </nav>
         </div>
       )}
