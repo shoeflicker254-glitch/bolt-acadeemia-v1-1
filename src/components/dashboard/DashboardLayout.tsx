@@ -1,17 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { 
   Menu, X, LogOut, User, Settings, Home, Users, BookOpen, 
   BarChart, Calendar, Bell, FileText, Package, CreditCard,
-  Shield, Database, School, UserCheck, GraduationCap, Edit
+  Shield, Database, School, UserCheck, GraduationCap, Edit,
+  Clock
 } from 'lucide-react';
 import Button from '../ui/Button';
 
 const DashboardLayout: React.FC = () => {
   const { user, signOut, userRole } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [lastActivity, setLastActivity] = useState(Date.now());
   const navigate = useNavigate();
+
+  // Update last activity time on user interaction
+  useEffect(() => {
+    const updateActivity = () => {
+      setLastActivity(Date.now());
+    };
+
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+    events.forEach(event => {
+      document.addEventListener(event, updateActivity);
+    });
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, updateActivity);
+      });
+    };
+  }, []);
 
   const handleSignOut = async () => {
     await signOut();
@@ -83,6 +103,20 @@ const DashboardLayout: React.FC = () => {
 
   const menuItems = getMenuItems();
 
+  // Calculate time since last activity for display
+  const getActivityStatus = () => {
+    const timeSinceActivity = Date.now() - lastActivity;
+    const minutes = Math.floor(timeSinceActivity / (1000 * 60));
+    
+    if (minutes < 1) {
+      return 'Active now';
+    } else if (minutes === 1) {
+      return '1 minute ago';
+    } else {
+      return `${minutes} minutes ago`;
+    }
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -120,6 +154,17 @@ const DashboardLayout: React.FC = () => {
         </nav>
 
         <div className="p-4 border-t border-gray-200">
+          {/* Activity Status */}
+          <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+            <div className="flex items-center text-xs text-gray-600">
+              <Clock size={14} className="mr-2" />
+              <span>Last activity: {getActivityStatus()}</span>
+            </div>
+            <div className="text-xs text-gray-500 mt-1">
+              Auto-logout after 30 minutes of inactivity
+            </div>
+          </div>
+
           <div className="flex items-center mb-4">
             <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
               {user?.email?.charAt(0).toUpperCase()}
