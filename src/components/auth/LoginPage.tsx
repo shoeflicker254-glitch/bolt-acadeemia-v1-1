@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, AlertCircle, ArrowLeft } from 'lucide-react';
 import Button from '../ui/Button';
 
 const LoginPage: React.FC = () => {
@@ -50,6 +50,17 @@ const LoginPage: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+        {/* Back to Website Link */}
+        <div className="text-center">
+          <Link 
+            to="/" 
+            className="inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors mb-6"
+          >
+            <ArrowLeft size={20} className="mr-2" />
+            Back to Acadeemia Website
+          </Link>
+        </div>
+
         <div className="text-center">
           <img 
             src="https://cfdptmabmfdmaiphtcqa.supabase.co/storage/v1/object/sign/acadeemia-bolt/acadeemia-logo.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81NmM2NjMyZS0yMmZkLTRkMDAtYTI5ZS05MzVmNWFmOTBhNDciLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhY2FkZWVtaWEtYm9sdC9hY2FkZWVtaWEtbG9nby5wbmciLCJpYXQiOjE3NTA3NTAzMTUsImV4cCI6MzMyODY3NTAzMTV9.OIlwvdnuomUOtCYPQ4uIsvMRY12r3PdL9PEHVqKkxSk"
@@ -139,13 +150,53 @@ const LoginPage: React.FC = () => {
             {isSubmitting ? 'Signing in...' : 'Sign in'}
           </Button>
 
-          <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="text-sm font-medium text-blue-900 mb-2">Demo Credentials</h3>
-            <div className="text-xs text-blue-800 space-y-1">
-              <p><strong>Super Admin:</strong> superadmin@acadeemia.com / Acadeemia@2025</p>
-            </div>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{' '}
+              <Link to="/contact" className="text-primary-600 hover:text-primary-700 font-medium">
+                Contact us for access
+              </Link>
+            </p>
           </div>
         </form>
+
+        {/* Back to Website Section */}
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="text-center">
+            <h3 className="text-lg font-medium text-gray-900 mb-3">
+              Explore Acadeemia
+            </h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Learn more about our school management solutions
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              <Link 
+                to="/features" 
+                className="text-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-700">Features</span>
+              </Link>
+              <Link 
+                to="/demo" 
+                className="text-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-700">Request Demo</span>
+              </Link>
+              <Link 
+                to="/pricing" 
+                className="text-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-700">Pricing</span>
+              </Link>
+              <Link 
+                to="/contact" 
+                className="text-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span className="text-sm font-medium text-gray-700">Contact</span>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
