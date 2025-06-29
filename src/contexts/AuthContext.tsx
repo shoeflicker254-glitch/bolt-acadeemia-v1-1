@@ -62,12 +62,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchUserProfile = async (userId: string) => {
     try {
-      // First check if user is a super admin
-      const { data: superAdmin } = await supabase
+      // First check if user is a super admin using maybeSingle() to avoid PGRST116 error
+      const { data: superAdmin, error: superAdminError } = await supabase
         .from('super_admins')
         .select('*')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
+
+      if (superAdminError) {
+        console.error('Error checking super admin status:', superAdminError);
+      }
 
       if (superAdmin) {
         setUserRole('super_admin');
@@ -76,18 +80,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       // If not super admin, check regular users table
-      const { data: userProfile } = await supabase
+      // Use maybeSingle() here as well to handle cases where user might not exist
+      const { data: userProfile, error: userError } = await supabase
         .from('users')
         .select('role, school_id')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
+
+      if (userError) {
+        console.error('Error fetching user profile:', userError);
+        // Set default values if there's an error
+        setUserRole('user');
+        setSchoolId(null);
+        return;
+      }
 
       if (userProfile) {
         setUserRole(userProfile.role);
         setSchoolId(userProfile.school_id);
+      } else {
+        // User doesn't exist in users table, set default role
+        setUserRole('user');
+        setSchoolId(null);
       }
     } catch (error) {
       console.error('Error fetching user profile:', error);
+      // Set default values in case of any unexpected errors
+      setUserRole('user');
+      setSchoolId(null);
     }
   };
 
