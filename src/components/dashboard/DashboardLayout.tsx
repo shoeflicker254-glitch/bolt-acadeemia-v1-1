@@ -31,10 +31,10 @@ const DashboardLayout: React.FC = () => {
         { icon: <School size={20} />, label: 'Schools', path: '/dashboard/schools' },
         { icon: <Users size={20} />, label: 'Users', path: '/dashboard/users' },
         { icon: <CreditCard size={20} />, label: 'Subscriptions', path: '/dashboard/subscriptions' },
+        { icon: <Edit3 size={20} />, label: 'CMS', path: '/dashboard/cms' },
         { icon: <FileText size={20} />, label: 'Support Requests', path: '/dashboard/support' },
         { icon: <BarChart size={20} />, label: 'Analytics', path: '/dashboard/analytics' },
         { icon: <Settings size={20} />, label: 'Settings', path: '/dashboard/settings' },
-        { icon: <Edit3 size={20} />, label: 'CMS', path: '/dashboard/cms' },
       ];
     }
 
