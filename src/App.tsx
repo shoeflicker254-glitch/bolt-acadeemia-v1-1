@@ -20,6 +20,11 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import DashboardLayout from './components/dashboard/DashboardLayout';
 import DashboardHome from './components/dashboard/DashboardHome';
 import ProfilePage from './components/dashboard/ProfilePage';
+import CMSLayout from './components/cms/CMSLayout';
+import CMSDashboard from './components/cms/CMSDashboard';
+import PagesManager from './components/cms/PagesManager';
+import MediaManager from './components/cms/MediaManager';
+import PricingManager from './components/cms/PricingManager';
 import TawkChat from './components/ui/TawkChat';
 import CookieConsent from './components/ui/CookieConsent';
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
@@ -280,6 +285,42 @@ function App() {
                 <p className="text-gray-600">Configure your account and system settings.</p>
               </div>
             } />
+            
+            {/* CMS Routes - Super Admin Only */}
+            <Route path="cms" element={
+              <ProtectedRoute requiredRole={['super_admin']}>
+                <CMSLayout />
+              </ProtectedRoute>
+            }>
+              <Route index element={<CMSDashboard />} />
+              <Route path="pages" element={<PagesManager />} />
+              <Route path="media" element={<MediaManager />} />
+              <Route path="pricing" element={<PricingManager />} />
+              <Route path="sections" element={
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Sections Management</h1>
+                  <p className="text-gray-600">Manage page sections and layouts.</p>
+                </div>
+              } />
+              <Route path="content" element={
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Content Management</h1>
+                  <p className="text-gray-600">Manage individual content items.</p>
+                </div>
+              } />
+              <Route path="users" element={
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">User Management</h1>
+                  <p className="text-gray-600">Manage CMS users and permissions.</p>
+                </div>
+              } />
+              <Route path="settings" element={
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">CMS Settings</h1>
+                  <p className="text-gray-600">Configure CMS settings and preferences.</p>
+                </div>
+              } />
+            </Route>
           </Route>
 
           {/* Catch all route */}

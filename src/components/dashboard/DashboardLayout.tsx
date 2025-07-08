@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { 
   Menu, X, LogOut, User, Settings, Home, Users, BookOpen, 
   BarChart, Calendar, Bell, FileText, Package, CreditCard,
-  Shield, Database, School, UserCheck, GraduationCap
+  Shield, Database, School, UserCheck, GraduationCap, Edit3
 } from 'lucide-react';
 import Button from '../ui/Button';
 
@@ -34,6 +34,7 @@ const DashboardLayout: React.FC = () => {
         { icon: <FileText size={20} />, label: 'Support Requests', path: '/dashboard/support' },
         { icon: <BarChart size={20} />, label: 'Analytics', path: '/dashboard/analytics' },
         { icon: <Settings size={20} />, label: 'Settings', path: '/dashboard/settings' },
+        { icon: <Edit3 size={20} />, label: 'CMS', path: '/dashboard/cms' },
       ];
     }
 
