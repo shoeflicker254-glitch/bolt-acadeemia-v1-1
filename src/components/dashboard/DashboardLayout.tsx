@@ -31,6 +31,7 @@ const DashboardLayout: React.FC = () => {
         { icon: <School size={20} />, label: 'Schools', path: '/dashboard/schools' },
         { icon: <Users size={20} />, label: 'Users', path: '/dashboard/users' },
         { icon: <CreditCard size={20} />, label: 'Subscriptions', path: '/dashboard/subscriptions' },
+        { icon: <Package size={20} />, label: 'Store Manager', path: '/dashboard/store' },
         { icon: <Edit3 size={20} />, label: 'CMS', path: '/dashboard/cms' },
         { icon: <FileText size={20} />, label: 'Support Requests', path: '/dashboard/support' },
         { icon: <BarChart size={20} />, label: 'Analytics', path: '/dashboard/analytics' },
@@ -46,6 +47,7 @@ const DashboardLayout: React.FC = () => {
         { icon: <GraduationCap size={20} />, label: 'Students', path: '/dashboard/students' },
         { icon: <BookOpen size={20} />, label: 'Classes', path: '/dashboard/classes' },
         { icon: <CreditCard size={20} />, label: 'Finances', path: '/dashboard/finances' },
+        { icon: <Package size={20} />, label: 'Store Manager', path: '/dashboard/store' },
         { icon: <BarChart size={20} />, label: 'Reports', path: '/dashboard/reports' },
         { icon: <Settings size={20} />, label: 'Settings', path: '/dashboard/settings' },
       ];
@@ -59,6 +61,7 @@ const DashboardLayout: React.FC = () => {
         { icon: <Calendar size={20} />, label: 'Schedule', path: '/dashboard/schedule' },
         { icon: <FileText size={20} />, label: 'Assignments', path: '/dashboard/assignments' },
         { icon: <BarChart size={20} />, label: 'Grades', path: '/dashboard/grades' },
+        { icon: <Package size={20} />, label: 'Store Manager', path: '/dashboard/store' },
         { icon: <Bell size={20} />, label: 'Announcements', path: '/dashboard/announcements' },
       ];
     }
@@ -69,6 +72,7 @@ const DashboardLayout: React.FC = () => {
         { icon: <UserCheck size={20} />, label: 'Attendance', path: '/dashboard/attendance' },
         { icon: <GraduationCap size={20} />, label: 'Students', path: '/dashboard/students' },
         { icon: <FileText size={20} />, label: 'Records', path: '/dashboard/records' },
+        { icon: <Package size={20} />, label: 'Store Manager', path: '/dashboard/store' },
         { icon: <Bell size={20} />, label: 'Announcements', path: '/dashboard/announcements' },
       ];
     }
@@ -76,6 +80,7 @@ const DashboardLayout: React.FC = () => {
     // Default user role
     return [
       ...baseItems,
+      { icon: <Package size={20} />, label: 'Store Manager', path: '/dashboard/store' },
       { icon: <Bell size={20} />, label: 'Notifications', path: '/dashboard/notifications' },
       { icon: <FileText size={20} />, label: 'Documents', path: '/dashboard/documents' },
     ];

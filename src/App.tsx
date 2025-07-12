@@ -326,6 +326,20 @@ function App() {
                 </div>
               } />
             </Route>
+            
+            {/* Store Routes - Available to All Users */}
+            <Route path="store" element={<StoreLayout />}>
+              <Route index element={<StoreDashboard />} />
+              <Route path="addons" element={<AddOnsManager />} />
+              <Route path="orders" element={<OrdersManager />} />
+              <Route path="analytics" element={<StoreAnalytics />} />
+              <Route path="settings" element={
+                <div className="p-6">
+                  <h1 className="text-2xl font-bold">Store Settings</h1>
+                  <p className="text-gray-600">Configure store settings and preferences.</p>
+                </div>
+              } />
+            </Route>
           </Route>
 
           {/* Catch all route */}

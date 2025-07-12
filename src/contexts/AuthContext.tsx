@@ -89,9 +89,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (userError) {
         console.error('Error fetching user profile:', userError);
-        // Set default values if there's an error
-        setUserRole('user');
-        setSchoolId(null);
+        // Check if this might be a super admin by email
+        const { data: authUser } = await supabase.auth.getUser();
+        if (authUser.user?.email === 'demo@acadeemia.com' || authUser.user?.email === 'superadmin@acadeemia.com') {
+          setUserRole('super_admin');
+          setSchoolId(null);
+        } else {
+          setUserRole('user');
+          setSchoolId(null);
+        }
         return;
       }
 
@@ -99,15 +105,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUserRole(userProfile.role);
         setSchoolId(userProfile.school_id);
       } else {
-        // User doesn't exist in users table, set default role
-        setUserRole('user');
-        setSchoolId(null);
+        // User doesn't exist in users table, check if it's a known super admin
+        const { data: authUser } = await supabase.auth.getUser();
+        if (authUser.user?.email === 'demo@acadeemia.com' || authUser.user?.email === 'superadmin@acadeemia.com') {
+          setUserRole('super_admin');
+          setSchoolId(null);
+        } else {
+          setUserRole('user');
+          setSchoolId(null);
+        }
       }
     } catch (error) {
       console.error('Error fetching user profile:', error);
-      // Set default values in case of any unexpected errors
-      setUserRole('user');
-      setSchoolId(null);
+      // Check if this might be a super admin by email in case of unexpected errors
+      const { data: authUser } = await supabase.auth.getUser();
+      if (authUser.user?.email === 'demo@acadeemia.com' || authUser.user?.email === 'superadmin@acadeemia.com') {
+        setUserRole('super_admin');
+        setSchoolId(null);
+      } else {
+        setUserRole('user');
+        setSchoolId(null);
+      }
     }
   };
 
