@@ -485,7 +485,6 @@ const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({ order, onClose, o
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
