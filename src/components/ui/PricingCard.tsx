@@ -70,13 +70,15 @@ const PricingCard: React.FC<PricingCardProps> = ({
           </ul>
         </div>
         
-        <Button
-          variant={highlight ? 'primary' : 'outline'}
-          fullWidth
-          onClick={onButtonClick}
-        >
-          {buttonText}
-        </Button>
+        <div className="mt-auto">
+          <Button
+            variant={highlight ? 'primary' : 'outline'}
+            fullWidth
+            onClick={onButtonClick}
+          >
+            {buttonText}
+          </Button>
+        </div>
       </div>
     </div>
   );

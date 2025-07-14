@@ -583,7 +583,6 @@ const Pricing: React.FC = () => {
                             size="sm"
                             icon={<ShoppingCart size={16} />}
                             onClick={() => handleBuyAddon(saasaddon.name, saasaddon.price)}
-                            className="min-w-[100px]"
                           >
                             Buy Now
                           </Button>
@@ -619,6 +618,7 @@ const Pricing: React.FC = () => {
                             size="sm"
                             icon={<ShoppingCart size={16} />}
                             onClick={() => handleBuyAddon(standaloneaddon.name, standaloneaddon.price)}
+                            className="min-w-[100px]"
                           >
                             Buy Now
                           </Button>
