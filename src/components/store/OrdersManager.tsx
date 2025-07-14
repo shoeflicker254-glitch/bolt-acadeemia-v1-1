@@ -401,7 +401,7 @@ const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({ order, onClose, o
                     <span className="font-medium">Status:</span>
                     <p className="text-2xl font-bold text-gray-900">{formatPrice(totalRevenue)}</p>
                       {order.status}
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
