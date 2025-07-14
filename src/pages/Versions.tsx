@@ -277,9 +277,11 @@ const Versions: React.FC = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button variant="secondary" fullWidth onClick={handleRequestDemo}>
-                  Try Standalone Demo
-                </Button>
+                <div className="flex-1">
+                  <Button variant="secondary" fullWidth onClick={handleRequestDemo}>
+                    Try Standalone Demo
+                  </Button>
+                </div>
                 <div className="flex-1">
                   <Button variant="outline" fullWidth onClick={handleStandalonePricing}>
                     View Pricing

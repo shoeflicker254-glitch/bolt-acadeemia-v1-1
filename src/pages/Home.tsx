@@ -83,15 +83,17 @@ const Home: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-auto">
                 <Link to="/versions" className="flex-1" onClick={handleNavClick}>
                   <Button variant="primary" fullWidth>
                     Learn More
                   </Button>
                 </Link>
-                <Button variant="outline" fullWidth onClick={handleRequestDemo}>
-                  Try Demo
-                </Button>
+                <div className="flex-1">
+                  <Button variant="outline" fullWidth onClick={handleRequestDemo}>
+                    Try Demo
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -111,15 +113,17 @@ const Home: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-auto">
                 <Link to="/versions" className="flex-1" onClick={handleNavClick}>
                   <Button variant="secondary" fullWidth>
                     Learn More
                   </Button>
                 </Link>
-                <Button variant="outline" fullWidth onClick={handleRequestDemo}>
-                  Try Demo
-                </Button>
+                <div className="flex-1">
+                  <Button variant="outline" fullWidth onClick={handleRequestDemo}>
+                    Try Demo
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
