@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+import CurrencySwitcher from '../components/ui/CurrencySwitcher';
+import { useCurrency } from '../contexts/CurrencyContext';
 
 interface AddOn {
   id: string;
@@ -25,6 +27,7 @@ interface CartItem extends AddOn {
 const Store: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { formatPrice } = useCurrency();
   const [activeCategory, setActiveCategory] = useState<'all' | 'saas' | 'standalone'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -332,6 +335,11 @@ const Store: React.FC = () => {
       <section className="bg-white py-8 border-b border-gray-200 sticky top-20 z-40">
         <div className="container">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            {/* Currency Switcher */}
+            <div className="order-first lg:order-none">
+              <CurrencySwitcher showLabel={false} />
+            </div>
+            
             {/* Search */}
             <div className="relative flex-1 max-w-md">
               <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -454,7 +462,7 @@ const Store: React.FC = () => {
                     </div>
                     
                     <div className="mt-auto flex items-center justify-between">
-                      <span className="font-bold text-lg">KES {addon.price.toLocaleString()}</span>
+                      <span className="font-bold text-lg">{formatPrice(addon.price)}</span>
                       <Button 
                         variant={addon.category === 'saas' ? 'primary' : 'secondary'} 
                         size="sm" 

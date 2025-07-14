@@ -5,10 +5,13 @@ import {
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import PricingCard from '../components/ui/PricingCard';
+import CurrencySwitcher from '../components/ui/CurrencySwitcher';
+import { useCurrency } from '../contexts/CurrencyContext';
 
 const Pricing: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { formatPrice } = useCurrency();
   const [billingPeriod, setBillingPeriod] = useState<'termly' | 'annual'>('annual');
   const [showAddOns, setShowAddOns] = useState(true);
   
@@ -54,9 +57,9 @@ const Pricing: React.FC = () => {
   const getPrice = (termlyPrice: number) => {
     if (billingPeriod === 'annual') {
       const annualPrice = termlyPrice * 0.9 * 3;
-      return `KES ${Math.round(annualPrice / 3).toLocaleString()}`; // Display the termly equivalent
+      return formatPrice(Math.round(annualPrice / 3)); // Display the termly equivalent
     }
-    return `KES ${termlyPrice.toLocaleString()}`;
+    return formatPrice(termlyPrice);
   };
   
   const saasPlans = [
@@ -378,6 +381,10 @@ const Pricing: React.FC = () => {
       <section className="bg-white py-12 border-b border-gray-200">
         <div className="container">
           <div className="flex flex-col items-center">
+            <div className="mb-6">
+              <CurrencySwitcher />
+            </div>
+            
             <div className="flex justify-center space-x-4 mb-8">
               <button
                 onClick={() => handleBillingPeriodChange('termly')}
@@ -489,7 +496,7 @@ const Pricing: React.FC = () => {
                 key={index}
                 title={plan.title}
                 description={plan.description}
-                price={`KES ${plan.termlyPrice.toLocaleString()}`}
+                price={formatPrice(plan.termlyPrice)}
                 period={plan.period}
                 features={plan.features}
                 highlight={plan.highlight}
@@ -576,7 +583,7 @@ const Pricing: React.FC = () => {
                       <tr key={index} className="hover:bg-gray-50">
                         <td className="px-6 py-4 font-medium">{saasaddon.name}</td>
                         <td className="px-6 py-4 text-gray-600">{saasaddon.description}</td>
-                        <td className="px-6 py-4 text-right font-medium">KES {saasaddon.price.toLocaleString()}/term</td>
+                        <td className="px-6 py-4 text-right font-medium">{formatPrice(saasaddon.price)}/term</td>
                         <td className="px-6 py-4 text-center">
                           <Button
                             variant="primary"
@@ -611,7 +618,7 @@ const Pricing: React.FC = () => {
                       <tr key={index} className="hover:bg-gray-50">
                         <td className="px-6 py-4 font-medium">{standaloneaddon.name}</td>
                         <td className="px-6 py-4 text-gray-600">{standaloneaddon.description}</td>
-                        <td className="px-6 py-4 text-right font-medium">KES {standaloneaddon.price.toLocaleString()}/term</td>
+                        <td className="px-6 py-4 text-right font-medium">{formatPrice(standaloneaddon.price)}/term</td>
                         <td className="px-6 py-4 text-center">
                           <Button
                             variant="secondary"
@@ -646,7 +653,7 @@ const Pricing: React.FC = () => {
                         <td className="px-6 py-4 font-medium">{service.name}</td>
                         <td className="px-6 py-4 text-gray-600">{service.description}</td>
                         <td className="px-6 py-4 text-right font-medium">
-                          KES {service.price.toLocaleString()}/{service.unit}
+                          {formatPrice(service.price)}/{service.unit}
                         </td>
                         <td className="px-6 py-4 text-center">
                           <Button

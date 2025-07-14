@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { CurrencyProvider } from './contexts/CurrencyContext';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
@@ -51,14 +52,15 @@ const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={
-            <PublicLayout>
-              <Home />
-            </PublicLayout>
-          } />
+      <CurrencyProvider>
+        <Router>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={
+              <PublicLayout>
+                <Home />
+              </PublicLayout>
+            } />
           <Route path="/versions" element={
             <PublicLayout>
               <Versions />
@@ -342,10 +344,11 @@ function App() {
             </Route>
           </Route>
 
-          {/* Catch all route */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Router>
+            {/* Catch all route */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </CurrencyProvider>
     </AuthProvider>
   );
 }

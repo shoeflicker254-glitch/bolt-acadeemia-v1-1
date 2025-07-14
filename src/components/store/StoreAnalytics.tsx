@@ -5,8 +5,10 @@ import {
 } from 'lucide-react';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 const StoreAnalytics: React.FC = () => {
+  const { formatPrice } = useCurrency();
   const [dateRange, setDateRange] = useState('30d');
   const [category, setCategory] = useState('all');
 
@@ -14,7 +16,7 @@ const StoreAnalytics: React.FC = () => {
     { 
       icon: <DollarSign size={24} />, 
       title: 'Total Revenue', 
-      value: 'KES 2,456,780', 
+      value: formatPrice(2456780), 
       change: '+15.3%', 
       color: 'bg-green-50 text-green-600',
       trend: 'up'
@@ -175,7 +177,7 @@ const StoreAnalytics: React.FC = () => {
                   </div>
                   <div className="flex justify-between mt-1">
                     <span className="text-xs text-gray-500">{addon.sales} sales</span>
-                    <span className="text-xs text-gray-500">KES {addon.revenue.toLocaleString()}</span>
+                    <span className="text-xs text-gray-500">{formatPrice(addon.revenue)}</span>
                   </div>
                 </div>
               </div>
@@ -207,7 +209,7 @@ const StoreAnalytics: React.FC = () => {
           <div className="mt-6 pt-6 border-t border-gray-200">
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-900">89</div>
-              <div className="text-sm text-gray-600">Total Active Customers</div>
+                {formatPrice(15748)}
             </div>
           </div>
         </Card>
@@ -290,8 +292,8 @@ const StoreAnalytics: React.FC = () => {
                     </span>
                   </td>
                   <td className="py-3 px-4 text-gray-600">{addon.sales}</td>
-                  <td className="py-3 px-4 font-medium text-gray-900">KES {addon.revenue.toLocaleString()}</td>
-                  <td className="py-3 px-4 text-gray-600">KES {Math.round(addon.revenue / addon.sales).toLocaleString()}</td>
+                  <td className="py-3 px-4 font-medium text-gray-900">{formatPrice(addon.revenue)}</td>
+                  <td className="py-3 px-4 text-gray-600">{formatPrice(Math.round(addon.revenue / addon.sales))}</td>
                   <td className="py-3 px-4">
                     <span className="text-green-600 font-medium">+{(Math.random() * 20 + 5).toFixed(1)}%</span>
                   </td>

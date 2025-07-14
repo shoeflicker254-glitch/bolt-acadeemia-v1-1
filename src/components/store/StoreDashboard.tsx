@@ -6,29 +6,31 @@ import {
 } from 'lucide-react';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 const StoreDashboard: React.FC = () => {
   const navigate = useNavigate();
+  const { formatPrice } = useCurrency();
 
   const stats = [
     { icon: <Package size={24} />, title: 'Total Add-ons', value: '24', change: '+3', color: 'bg-blue-50 text-blue-600' },
     { icon: <ShoppingCart size={24} />, title: 'Total Orders', value: '156', change: '+12', color: 'bg-green-50 text-green-600' },
-    { icon: <DollarSign size={24} />, title: 'Revenue', value: 'KES 2.4M', change: '+15%', color: 'bg-purple-50 text-purple-600' },
+    { icon: <DollarSign size={24} />, title: 'Revenue', value: formatPrice(2400000), change: '+15%', color: 'bg-purple-50 text-purple-600' },
     { icon: <Users size={24} />, title: 'Active Customers', value: '89', change: '+8', color: 'bg-orange-50 text-orange-600' },
   ];
 
   const recentOrders = [
-    { id: 'ORD-001', customer: 'Westlake Academy', addon: 'QR Code Attendance', amount: 'KES 3,999', status: 'completed', time: '2 hours ago' },
-    { id: 'ORD-002', customer: 'Riverside College', addon: 'Android App', amount: 'KES 3,999', status: 'pending', time: '4 hours ago' },
-    { id: 'ORD-003', customer: 'Global Institute', addon: 'Multi Branch', amount: 'KES 2,999', status: 'completed', time: '6 hours ago' },
-    { id: 'ORD-004', customer: 'Tech Academy', addon: 'Zoom Live Classes', amount: 'KES 1,999', status: 'processing', time: '1 day ago' },
+    { id: 'ORD-001', customer: 'Westlake Academy', addon: 'QR Code Attendance', amount: formatPrice(3999), status: 'completed', time: '2 hours ago' },
+    { id: 'ORD-002', customer: 'Riverside College', addon: 'Android App', amount: formatPrice(3999), status: 'pending', time: '4 hours ago' },
+    { id: 'ORD-003', customer: 'Global Institute', addon: 'Multi Branch', amount: formatPrice(2999), status: 'completed', time: '6 hours ago' },
+    { id: 'ORD-004', customer: 'Tech Academy', addon: 'Zoom Live Classes', amount: formatPrice(1999), status: 'processing', time: '1 day ago' },
   ];
 
   const topAddons = [
-    { name: 'QR Code Attendance', sales: 45, revenue: 'KES 179,550', category: 'Both' },
-    { name: 'Android App', sales: 32, revenue: 'KES 127,680', category: 'Standalone' },
-    { name: 'Two-Factor Authentication', sales: 28, revenue: 'KES 69,720', category: 'SaaS' },
-    { name: 'Multi Branch', sales: 24, revenue: 'KES 71,976', category: 'Standalone' },
+    { name: 'QR Code Attendance', sales: 45, revenue: formatPrice(179550), category: 'Both' },
+    { name: 'Android App', sales: 32, revenue: formatPrice(127680), category: 'Standalone' },
+    { name: 'Two-Factor Authentication', sales: 28, revenue: formatPrice(69720), category: 'SaaS' },
+    { name: 'Multi Branch', sales: 24, revenue: formatPrice(71976), category: 'Standalone' },
   ];
 
   const quickActions = [

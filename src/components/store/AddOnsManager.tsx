@@ -6,6 +6,7 @@ import {
 import { supabase } from '../../lib/supabase';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 interface AddOn {
   id: string;
@@ -21,6 +22,7 @@ interface AddOn {
 }
 
 const AddOnsManager: React.FC = () => {
+  const { formatPrice } = useCurrency();
   const [addOns, setAddOns] = useState<AddOn[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -229,7 +231,7 @@ const AddOnsManager: React.FC = () => {
             </div>
             
             <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">KES {addon.price.toLocaleString()}</span>
+              <span className="font-bold text-lg">{formatPrice(addon.price)}</span>
               <div className="flex space-x-2">
                 <Button variant="outline" size="sm" icon={<Eye size={14} />}>
                   View

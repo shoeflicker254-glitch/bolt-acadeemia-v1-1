@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { useCurrency } from '../../contexts/CurrencyContext';
 
 interface Order {
   id: string;
@@ -28,6 +29,7 @@ interface OrderItem {
 }
 
 const OrdersManager: React.FC = () => {
+  const { formatPrice } = useCurrency();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -290,7 +292,7 @@ const OrdersManager: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">
-                      KES {order.total_amount.toLocaleString()}
+                      {formatPrice(order.total_amount)}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -397,7 +399,7 @@ const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({ order, onClose, o
                   <div><span className="font-medium">Payment Method:</span> {order.payment_method}</div>
                   <div>
                     <span className="font-medium">Status:</span>
-                    <span className={`ml-2 inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}>
+                    <p className="text-2xl font-bold text-gray-900">{formatPrice(totalRevenue)}</p>
                       {order.status}
                     </span>
                   </div>
