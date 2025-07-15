@@ -15,7 +15,7 @@ const StoreDashboard: React.FC = () => {
   const stats = [
     { icon: <Package size={24} />, title: 'Total Add-ons', value: '24', change: '+3', color: 'bg-blue-50 text-blue-600' },
     { icon: <ShoppingCart size={24} />, title: 'Total Orders', value: '156', change: '+12', color: 'bg-green-50 text-green-600' },
-    { icon: <DollarSign size={24} />, title: 'Revenue', value: formatPrice(2400000), change: '+15%', color: 'bg-purple-50 text-purple-600' },
+    { icon: <DollarSign size={24} />, title: 'Revenue', value: formatPrice(2456780), change: '+15%', color: 'bg-purple-50 text-purple-600' },
     { icon: <Users size={24} />, title: 'Active Customers', value: '89', change: '+8', color: 'bg-orange-50 text-orange-600' },
   ];
 

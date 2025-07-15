@@ -49,7 +49,7 @@ const CurrencySwitcher: React.FC<CurrencySwitcherProps> = ({
       {currency === 'USD' && (
         <div className="text-xs text-gray-500">
           {loading ? (
-            <span>Loading rate...</span>
+            <span className="animate-pulse">Loading...</span>
           ) : (
             <span>1 USD = {exchangeRate.toFixed(2)} KES</span>
           )}
