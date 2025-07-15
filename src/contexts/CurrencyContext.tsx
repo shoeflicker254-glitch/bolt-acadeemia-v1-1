@@ -21,14 +21,13 @@ export const useCurrency = () => {
 
 export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currency, setCurrency] = useState<'USD' | 'KES'>('KES');
-  const [exchangeRate, setExchangeRate] = useState(130); // Default fallback rate
+  const [exchangeRate, setExchangeRate] = useState(130); // Default fallback rate: 1 USD = 130 KES
   const [loading, setLoading] = useState(false);
 
-  // Fetch exchange rate from Google Finance API alternative
+  // Fetch exchange rate from ExchangeRate-API (free service)
   const fetchExchangeRate = async () => {
     setLoading(true);
     try {
-      // Using a free exchange rate API as Google Finance API is not directly accessible
       const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
       const data = await response.json();
       
@@ -36,6 +35,7 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setExchangeRate(data.rates.KES);
         localStorage.setItem('exchangeRate', data.rates.KES.toString());
         localStorage.setItem('exchangeRateTimestamp', Date.now().toString());
+        console.log(`Exchange rate updated: 1 USD = ${data.rates.KES} KES`);
       }
     } catch (error) {
       console.error('Error fetching exchange rate:', error);
@@ -43,6 +43,7 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const cachedRate = localStorage.getItem('exchangeRate');
       if (cachedRate) {
         setExchangeRate(parseFloat(cachedRate));
+        console.log(`Using cached exchange rate: 1 USD = ${cachedRate} KES`);
       }
     } finally {
       setLoading(false);
@@ -72,11 +73,21 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     } else {
       fetchExchangeRate();
     }
+
+    // Set up periodic rate updates (every hour)
+    const interval = setInterval(() => {
+      if (shouldFetchRate()) {
+        fetchExchangeRate();
+      }
+    }, 60 * 60 * 1000); // Check every hour
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleSetCurrency = (newCurrency: 'USD' | 'KES') => {
     setCurrency(newCurrency);
     localStorage.setItem('preferredCurrency', newCurrency);
+    console.log(`Currency changed to: ${newCurrency}`);
   };
 
   const convertPrice = (kesPrice: number): number => {
