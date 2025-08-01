@@ -34,6 +34,10 @@ import StoreAnalytics from './components/store/StoreAnalytics';
 import TawkChat from './components/ui/TawkChat';
 import CookieConsent from './components/ui/CookieConsent';
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
+import FormsLayout from './components/dashboard/FormsLayout';
+import DemoRequestsManager from './components/dashboard/DemoRequestsManager';
+import ContactFormsManager from './components/dashboard/ContactFormsManager';
+import SupportRequestsManager from './components/dashboard/SupportRequestsManager';
 
 // Layout component for public pages
 const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -292,6 +296,17 @@ function App() {
                 <p className="text-gray-600">Configure your account and system settings.</p>
               </div>
             } />
+            
+            {/* Forms Management Routes - Super Admin Only */}
+            <Route path="forms" element={
+              <ProtectedRoute requiredRole={['super_admin']}>
+                <FormsLayout />
+              </ProtectedRoute>
+            }>
+              <Route path="demo-requests" element={<DemoRequestsManager />} />
+              <Route path="contact-forms" element={<ContactFormsManager />} />
+              <Route path="support-requests" element={<SupportRequestsManager />} />
+            </Route>
             
             {/* CMS Routes - Super Admin Only */}
             <Route path="cms" element={
