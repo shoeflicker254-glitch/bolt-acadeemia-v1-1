@@ -4,7 +4,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { 
   Menu, X, LogOut, User, Settings, Home, Users, BookOpen, 
   BarChart, Calendar, Bell, FileText, Package, CreditCard,
-  Shield, Database, School, UserCheck, GraduationCap, Edit3
   Shield, Database, School, UserCheck, GraduationCap, Edit3,
   MessageSquare
 } from 'lucide-react';
