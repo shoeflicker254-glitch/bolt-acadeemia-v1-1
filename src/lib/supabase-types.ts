@@ -189,6 +189,105 @@ export interface Database {
           updated_at?: string
         }
       }
+      demo_requests: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          phone: string | null
+          institution: string
+          role: string
+          version: string
+          message: string | null
+          calendly_url: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          phone?: string | null
+          institution: string
+          role: string
+          version: string
+          message?: string | null
+          calendly_url?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          email?: string
+          phone?: string | null
+          institution?: string
+          role?: string
+          version?: string
+          message?: string | null
+          calendly_url?: string | null
+          created_at?: string
+        }
+      }
+      contacts: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          email?: string
+          subject?: string
+          message?: string
+          created_at?: string
+        }
+      }
+      email_support_requests: {
+        Row: {
+          id: string
+          sender_name: string
+          sender_email: string
+          subject: string
+          support_type: string
+          message: string
+          ticket_number: string
+          status: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          sender_name: string
+          sender_email: string
+          subject: string
+          support_type: string
+          message: string
+          ticket_number: string
+          status?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          sender_name?: string
+          sender_email?: string
+          subject?: string
+          support_type?: string
+          message?: string
+          ticket_number?: string
+          status?: string
+          created_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never

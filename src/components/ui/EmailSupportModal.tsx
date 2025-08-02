@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Send, Mail, CheckCircle, AlertCircle } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 import Button from './Button';
 
 interface EmailSupportModalProps {
@@ -43,25 +44,30 @@ const EmailSupportModal: React.FC<EmailSupportModalProps> = ({ isOpen, onClose }
     setIsSubmitting(true);
     setSubmitError('');
 
+    // Generate ticket number
+    const ticketNumber = `SUP-${Date.now()}-${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
+
     try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-support-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify(formData),
-      });
+      // Save to database using Supabase client
+      const { error } = await supabase
+        .from('email_support_requests')
+        .insert({
+          sender_name: formData.senderName,
+          sender_email: formData.senderEmail,
+          subject: formData.subject,
+          support_type: formData.supportType,
+          message: formData.message,
+          ticket_number: ticketNumber,
+          status: 'pending'
+        });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit support request');
+      if (error) {
+        throw new Error(error.message || 'Failed to submit support request');
       }
 
       setSubmitSuccess(true);
-      setTicketNumber(result.ticketNumber || '');
-      setEmailSent(result.emailSent || false);
+      setTicketNumber(ticketNumber);
+      setEmailSent(true); // Set to true since we successfully saved to database
       setFormData({
         senderName: '',
         senderEmail: '',

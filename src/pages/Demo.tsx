@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Monitor, Server, ArrowRight, Calendar } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { useLocation } from 'react-router-dom';
@@ -101,19 +102,22 @@ const Demo: React.FC = () => {
     setSubmitError('');
     
     try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-demo-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify(formData),
-      });
+      // Save to database using Supabase client
+      const { error } = await supabase
+        .from('demo_requests')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          institution: formData.institution,
+          role: formData.role,
+          version: formData.version,
+          message: formData.message || null,
+          calendly_url: 'https://calendly.com/info-0rq/30min-demo-meeting'
+        });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to send demo request');
+      if (error) {
+        throw new Error(error.message || 'Failed to submit demo request');
       }
 
       setSubmitSuccess(true);
