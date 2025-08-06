@@ -8,6 +8,6 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   build: {
-    chunkSizeWarningLimit: 3200,
+    chunkSizeWarningLimit: 1600,
   },
 });
