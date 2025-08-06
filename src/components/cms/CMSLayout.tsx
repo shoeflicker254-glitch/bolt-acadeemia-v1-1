@@ -18,7 +18,7 @@ const CMSLayout: React.FC = () => {
     { icon: <Edit3 size={20} />, label: 'Content', path: '/dashboard/cms/content' },
     { icon: <Image size={20} />, label: 'Media', path: '/dashboard/cms/media' },
     { icon: <DollarSign size={20} />, label: 'Pricing', path: '/dashboard/cms/pricing' },
-    { icon: <Users size={20} />, label: 'Users', path: '/dashboard/cms/users' },
+    { icon: <Package size={20} />, label: 'Add-ons', path: '/dashboard/cms/addons' },
     { icon: <Settings size={20} />, label: 'Settings', path: '/dashboard/cms/settings' },
   ];
 

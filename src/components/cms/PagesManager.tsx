@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Plus, Edit, Eye, Trash2, Search, Filter, Globe, 
-  FileText, Calendar, User, MoreVertical
+  FileText, Calendar, User, MoreVertical, ExternalLink, Save
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import Card from '../ui/Card';
@@ -14,6 +14,8 @@ interface Page {
   title: string;
   meta_title?: string;
   meta_description?: string;
+  page_route?: string;
+  page_type?: string;
   is_published: boolean;
   created_at: string;
   updated_at: string;
@@ -40,6 +42,7 @@ const PagesManager: React.FC = () => {
         .order('updated_at', { ascending: false });
 
       if (error) throw error;
+      console.log('Fetched pages:', data);
       setPages(data || []);
     } catch (error) {
       console.error('Error fetching pages:', error);
@@ -68,7 +71,10 @@ const PagesManager: React.FC = () => {
     try {
       const { error } = await supabase
         .from('cms_pages')
-        .update({ is_published: !currentStatus })
+        .update({ 
+          is_published: !currentStatus,
+          updated_at: new Date().toISOString()
+        })
         .eq('id', id);
 
       if (error) throw error;
@@ -155,9 +161,16 @@ const PagesManager: React.FC = () => {
                     }`}>
                       {page.is_published ? 'Published' : 'Draft'}
                     </span>
+                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                      page.page_type === 'dynamic' 
+                        ? 'bg-blue-100 text-blue-800' 
+                        : 'bg-gray-100 text-gray-800'
+                    }`}>
+                      {page.page_type || 'static'}
+                    </span>
                   </div>
                   
-                  <p className="text-gray-600 mb-2">/{page.slug}</p>
+                  <p className="text-gray-600 mb-2">{page.page_route || `/${page.slug}`}</p>
                   
                   {page.meta_description && (
                     <p className="text-sm text-gray-500 mb-3">{page.meta_description}</p>
@@ -181,7 +194,7 @@ const PagesManager: React.FC = () => {
                   variant="outline"
                   size="sm"
                   icon={<Eye size={16} />}
-                  onClick={() => window.open(`/${page.slug}`, '_blank')}
+                  onClick={() => window.open(page.page_route || `/${page.slug}`, '_blank')}
                 >
                   Preview
                 </Button>
@@ -190,9 +203,17 @@ const PagesManager: React.FC = () => {
                   variant="outline"
                   size="sm"
                   icon={<Edit size={16} />}
-                  onClick={() => navigate(`/dashboard/cms/pages/${page.id}/edit`)}
+                  onClick={() => {
+                    if (page.page_type === 'dynamic') {
+                      // For dynamic pages, open the actual page for editing
+                      window.open(page.page_route || `/${page.slug}`, '_blank');
+                    } else {
+                      // For static pages, open CMS editor
+                      navigate(`/dashboard/cms/pages/${page.id}/edit`);
+                    }
+                  }}
                 >
-                  Edit
+                  {page.page_type === 'dynamic' ? 'View Live' : 'Edit'}
                 </Button>
                 
                 <Button

@@ -16,6 +16,7 @@ interface MediaFile {
   mime_type?: string;
   alt_text?: string;
   caption?: string;
+  category?: string;
   is_active: boolean;
   created_at: string;
   uploaded_by?: string;
@@ -29,6 +30,7 @@ const MediaManager: React.FC = () => {
   const [filterType, setFilterType] = useState<'all' | 'images' | 'documents'>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+  const [filterCategory, setFilterCategory] = useState<string>('all');
 
   useEffect(() => {
     fetchMediaFiles();
@@ -43,6 +45,7 @@ const MediaManager: React.FC = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
+      console.log('Fetched media files:', data);
       setMediaFiles(data || []);
     } catch (error) {
       console.error('Error fetching media files:', error);
@@ -79,6 +82,7 @@ const MediaManager: React.FC = () => {
             file_path: filePath,
             file_size: file.size,
             mime_type: file.type,
+            category: 'general',
             is_active: true
           });
 
@@ -110,6 +114,26 @@ const MediaManager: React.FC = () => {
     }
   };
 
+  const getMediaCategories = () => {
+    return [...new Set(mediaFiles.map(file => file.category || 'general'))];
+  };
+
+  const updateFileCategory = async (id: string, category: string) => {
+    try {
+      const { error } = await supabase
+        .from('cms_media')
+        .update({ category })
+        .eq('id', id);
+
+      if (error) throw error;
+      setMediaFiles(mediaFiles.map(file => 
+        file.id === id ? { ...file, category } : file
+      ));
+    } catch (error) {
+      console.error('Error updating file category:', error);
+    }
+  };
+
   const copyFileUrl = (filePath: string) => {
     const url = `${supabase.supabaseUrl}/storage/v1/object/public/cms-media/${filePath}`;
     navigator.clipboard.writeText(url);
@@ -133,7 +157,8 @@ const MediaManager: React.FC = () => {
     const matchesFilter = filterType === 'all' || 
                          (filterType === 'images' && isImage(file.mime_type)) ||
                          (filterType === 'documents' && !isImage(file.mime_type));
-    return matchesSearch && matchesFilter;
+    const matchesCategory = filterCategory === 'all' || file.category === filterCategory;
+    return matchesSearch && matchesFilter && matchesCategory;
   });
 
   if (loading) {
@@ -194,6 +219,16 @@ const MediaManager: React.FC = () => {
               <option value="images">Images</option>
               <option value="documents">Documents</option>
             </select>
+            <select
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            >
+              <option value="all">All Categories</option>
+              {getMediaCategories().map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
           </div>
           
           <div className="flex items-center space-x-2">
@@ -235,6 +270,20 @@ const MediaManager: React.FC = () => {
                   {file.original_filename}
                 </h3>
                 <p className="text-xs text-gray-500">{formatFileSize(file.file_size)}</p>
+                <div className="mb-2">
+                  <select
+                    value={file.category || 'general'}
+                    onChange={(e) => updateFileCategory(file.id, e.target.value)}
+                    className="text-xs border border-gray-300 rounded px-2 py-1 w-full"
+                  >
+                    <option value="general">General</option>
+                    <option value="logos">Logos</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="icons">Icons</option>
+                    <option value="banners">Banners</option>
+                    <option value="testimonials">Testimonials</option>
+                  </select>
+                </div>
                 
                 <div className="flex items-center space-x-1">
                   <Button
@@ -277,6 +326,9 @@ const MediaManager: React.FC = () => {
                     Size
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Category
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Uploaded
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -313,6 +365,20 @@ const MediaManager: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatFileSize(file.file_size)}
+                    </td>
+                    <td className="px-6 py-4">
+                      <select
+                        value={file.category || 'general'}
+                        onChange={(e) => updateFileCategory(file.id, e.target.value)}
+                        className="text-xs border border-gray-300 rounded px-2 py-1"
+                      >
+                        <option value="general">General</option>
+                        <option value="logos">Logos</option>
+                        <option value="frontend">Frontend</option>
+                        <option value="icons">Icons</option>
+                        <option value="banners">Banners</option>
+                        <option value="testimonials">Testimonials</option>
+                      </select>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {new Date(file.created_at).toLocaleDateString()}

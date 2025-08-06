@@ -26,6 +26,10 @@ import CMSDashboard from './components/cms/CMSDashboard';
 import PagesManager from './components/cms/PagesManager';
 import MediaManager from './components/cms/MediaManager';
 import PricingManager from './components/cms/PricingManager';
+import SectionsManager from './components/cms/SectionsManager';
+import ContentManager from './components/cms/ContentManager';
+import AddOnsManager from './components/cms/AddOnsManager';
+import CMSSettings from './components/cms/CMSSettings';
 import StoreLayout from './components/store/StoreLayout';
 import StoreDashboard from './components/store/StoreDashboard';
 import AddOnsManager from './components/store/AddOnsManager';
@@ -136,21 +140,22 @@ function App() {
             {/* Super Admin Routes */}
             <Route path="super-admin" element={
               <ProtectedRoute requiredRole={['super_admin']}>
+            <Route path="sections" element={<SectionsManager />} />
+            <Route path="content" element={<ContentManager />} />
                 <div className="p-6">
                   <h1 className="text-2xl font-bold">Super Admin Panel</h1>
-                  <p className="text-gray-600">Manage all system operations from here.</p>
+            <Route path="addons" element={
                 </div>
-              </ProtectedRoute>
-            } />
+                <h1 className="text-2xl font-bold">Add-ons Management</h1>
+                <p className="text-gray-600">Manage website add-ons and store integration.</p>
             <Route path="schools" element={
               <ProtectedRoute requiredRole={['super_admin']}>
-                <div className="p-6">
+            <Route path="settings" element={
                   <h1 className="text-2xl font-bold">Schools Management</h1>
-                  <p className="text-gray-600">Manage all registered schools.</p>
-                </div>
+                <h1 className="text-2xl font-bold">CMS Settings</h1>
+                <p className="text-gray-600">Configure CMS settings and preferences.</p>
               </ProtectedRoute>
             } />
-            <Route path="users" element={
               <ProtectedRoute requiredRole={['super_admin']}>
                 <div className="p-6">
                   <h1 className="text-2xl font-bold">Users Management</h1>
@@ -334,29 +339,8 @@ function App() {
                 <div className="p-6">
                   <h1 className="text-2xl font-bold">User Management</h1>
                   <p className="text-gray-600">Manage CMS users and permissions.</p>
-                </div>
-              } />
-              <Route path="settings" element={
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">CMS Settings</h1>
-                  <p className="text-gray-600">Configure CMS settings and preferences.</p>
-                </div>
-              } />
-            </Route>
-            
-            {/* Store Routes - Available to All Users */}
-            <Route path="store" element={<StoreLayout />}>
-              <Route index element={<StoreDashboard />} />
-              <Route path="addons" element={<AddOnsManager />} />
-              <Route path="orders" element={<OrdersManager />} />
-              <Route path="analytics" element={<StoreAnalytics />} />
-              <Route path="settings" element={
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Store Settings</h1>
-                  <p className="text-gray-600">Configure store settings and preferences.</p>
-                </div>
-              } />
-            </Route>
+            <Route path="addons" element={<AddOnsManager />} />
+            <Route path="settings" element={<CMSSettings />} />
           </Route>
 
             {/* Catch all route */}

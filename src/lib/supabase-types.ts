@@ -288,6 +288,141 @@ export interface Database {
           created_at?: string
         }
       }
+      cms_pricing_plans: {
+        Row: {
+          id: string
+          plan_name: string
+          plan_description: string
+          plan_type: 'saas' | 'standalone'
+          price_amount: number
+          price_period: string
+          features: string[]
+          is_highlighted: boolean
+          badge_text?: string
+          display_order: number
+          is_active: boolean
+          created_at: string
+          updated_at: string
+          created_by?: string
+          updated_by?: string
+        }
+        Insert: {
+          id?: string
+          plan_name: string
+          plan_description: string
+          plan_type: 'saas' | 'standalone'
+          price_amount: number
+          price_period?: string
+          features?: string[]
+          is_highlighted?: boolean
+          badge_text?: string
+          display_order?: number
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string
+          updated_by?: string
+        }
+        Update: {
+          id?: string
+          plan_name?: string
+          plan_description?: string
+          plan_type?: 'saas' | 'standalone'
+          price_amount?: number
+          price_period?: string
+          features?: string[]
+          is_highlighted?: boolean
+          badge_text?: string
+          display_order?: number
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+          created_by?: string
+          updated_by?: string
+        }
+      }
+      cms_addons: {
+        Row: {
+          id: string
+          store_addon_id?: string
+          addon_name: string
+          addon_description: string
+          addon_category: 'saas' | 'standalone'
+          price_amount: number
+          features: string[]
+          is_popular: boolean
+          is_active: boolean
+          display_order: number
+          created_at: string
+          updated_at: string
+          updated_by?: string
+        }
+        Insert: {
+          id?: string
+          store_addon_id?: string
+          addon_name: string
+          addon_description: string
+          addon_category: 'saas' | 'standalone'
+          price_amount: number
+          features?: string[]
+          is_popular?: boolean
+          is_active?: boolean
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+          updated_by?: string
+        }
+        Update: {
+          id?: string
+          store_addon_id?: string
+          addon_name?: string
+          addon_description?: string
+          addon_category?: 'saas' | 'standalone'
+          price_amount?: number
+          features?: string[]
+          is_popular?: boolean
+          is_active?: boolean
+          display_order?: number
+          created_at?: string
+          updated_at?: string
+          updated_by?: string
+        }
+      }
+      cms_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: any
+          setting_description?: string
+          setting_category: string
+          is_active: boolean
+          created_at: string
+          updated_at: string
+          updated_by?: string
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value: any
+          setting_description?: string
+          setting_category?: string
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+          updated_by?: string
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: any
+          setting_description?: string
+          setting_category?: string
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+          updated_by?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
