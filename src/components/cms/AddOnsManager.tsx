@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Package, Plus, Edit, Trash2, Search, Filter, 
-  Cloud, Server, Eye, Star, RefreshCw, Sync
-} from 'lucide-react';
+import { Package, Plus, Edit, Trash2, Search, Filter, Cloud, Server, Eye, Star, RefreshCw, FolderSync as Sync } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
