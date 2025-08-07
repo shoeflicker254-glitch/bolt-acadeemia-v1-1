@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { 
   FileText, Image, Settings, Layout, DollarSign, Users, 
-  Home, Plus, Search, Filter, Save, Eye, Edit3
+  Home, Plus, Search, Filter, Save, Eye, Edit3, Package
 } from 'lucide-react';
+
 import Button from '../ui/Button';
 
 const CMSLayout: React.FC = () => {
