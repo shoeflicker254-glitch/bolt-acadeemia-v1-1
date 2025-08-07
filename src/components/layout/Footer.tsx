@@ -13,10 +13,21 @@ const Footer: React.FC = () => {
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-semibold mb-4">Acadeemia</h3>
-            <p className="text-gray-400 mb-4">
-              Providing powerful and flexible school management solutions designed to elevate educational institutions.
-            </p>
+            <div className="space-y-4">
+              <Link to="/" className="flex items-center space-x-2">
+                <img
+                  src="/assets/logo/acadeemia-logo-white.png"
+                  alt="Acadeemia Logo" 
+                  className="w-50 h-12 object-contain"
+                />
+              </Link>
+              <div>
+                <p className="text-gray-400 mb-4">
+                  Providing powerful and flexible school management solutions designed to elevate educational institutions.
+                </p>
+              </div>
+            </div>
+            
             <div className="flex space-x-4">
               <a href="https://x.com/ACADEEMIA134163" className="text-gray-400 hover:text-white transition-colors">
                 <Twitter size={20} />
@@ -37,7 +48,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavClick}>
@@ -78,7 +89,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Legal</h3>
+            <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/terms" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavClick}>
@@ -104,7 +115,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-white font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin size={20} className="mr-2 text-primary-500 flex-shrink-0 mt-1" />
@@ -123,7 +134,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Acadeemia. All rights reserved.</p>
+          <p>Acadeemia &copy; {new Date().getFullYear()}. All rights reserved.</p>
         </div>
       </div>
     </footer>
