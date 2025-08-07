@@ -49,7 +49,7 @@ const Home: React.FC = () => {
             </div>
             <div className="hidden lg:block">
               <img 
-                src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                src="/assets/frontend/hero-image.png" 
                 alt="School Management Platform" 
                 className="rounded-xl shadow-2xl"
               />
