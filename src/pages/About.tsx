@@ -52,7 +52,7 @@ const About: React.FC = () => {
               <div className="absolute -top-5 -right-5 w-32 h-32 bg-primary-100 rounded-lg"></div>
               <div className="absolute -bottom-5 -left-5 w-32 h-32 bg-accent-100 rounded-lg"></div>
               <img 
-                src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                src="/assets/frontend/about-us.png" 
                 alt="Acadeemia team meeting" 
                 className="rounded-xl shadow-lg relative z-10"
               />
@@ -310,7 +310,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                src="/assets/frontend/about-us-2.png" 
                 alt="Team collaboration" 
                 className="rounded-xl shadow-lg"
               />
