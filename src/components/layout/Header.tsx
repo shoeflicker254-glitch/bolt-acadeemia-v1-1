@@ -52,7 +52,7 @@ const Header: React.FC = () => {
       <div className="container flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2" onClick={handleNavClick}>
           <img 
-            src="https://cfdptmabmfdmaiphtcqa.supabase.co/storage/v1/object/sign/acadeemia-bolt/acadeemia-logo.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81NmM2NjMyZS0yMmZkLTRkMDAtYTI5ZS05MzVmNWFmOTBhNDciLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhY2FkZWVtaWEtYm9sdC9hY2FkZWVtaWEtbG9nby5wbmciLCJpYXQiOjE3NTA3NTAzMTUsImV4cCI6MzMyODY3NTAzMTV9.OIlwvdnuomUOtCYPQ4uIsvMRY12r3PdL9PEHVqKkxSk"
+            src="/assets/logo/acadeemia-logo.png"
             alt="Acadeemia Logo" 
             className="h-12"
           />
