@@ -88,7 +88,7 @@ const NewsletterForm: React.FC = () => {
       </div>
       
       <p className="text-gray-300 mb-4">
-        Get the latest updates about Acadeemia features, educational insights, and industry news.
+        Get the latest updates about Acadeemia.
       </p>
 
       {submitSuccess && (
