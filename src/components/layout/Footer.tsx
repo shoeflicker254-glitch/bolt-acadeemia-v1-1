@@ -116,28 +116,30 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <MapPin size={20} className="mr-2 text-primary-500 flex-shrink-0 mt-1" />
-                <span className="text-gray-400">90 JGO James Gichuru Road Nairobi City, 00100</span>
-              </li>
-              <li className="flex items-center">
-                <Phone size={20} className="mr-2 text-primary-500 flex-shrink-0" />
-                <span className="text-gray-400">+254 111 313 818</span>
-              </li>
-              <li className="flex items-center">
-                <Mail size={20} className="mr-2 text-primary-500 flex-shrink-0" />
-                <span className="text-gray-400">info@acadeemia.com</span>
-              </li>
-            </ul>
+          <div className="lg:col-span-2 flex flex-col lg:flex-row lg:space-x-8">
+            <div className="lg:w-1/2 mb-8 lg:mb-0">
+              <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <MapPin size={20} className="mr-2 text-primary-500 flex-shrink-0 mt-1" />
+                  <span className="text-gray-400">90 JGO James Gichuru Road Nairobi City, 00100</span>
+                </li>
+                <li className="flex items-center">
+                  <Phone size={20} className="mr-2 text-primary-500 flex-shrink-0" />
+                  <span className="text-gray-400">+254 111 313 818</span>
+                </li>
+                <li className="flex items-center">
+                  <Mail size={20} className="mr-2 text-primary-500 flex-shrink-0" />
+                  <span className="text-gray-400">info@acadeemia.com</span>
+                </li>
+              </ul>
+            </div>
+          
+            <div className="lg:w-1/2">
+              <NewsletterForm />
+            </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <NewsletterForm />
-          </div>
-        </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
           <p>Acadeemia &copy; {new Date().getFullYear()}. All rights reserved.</p>
