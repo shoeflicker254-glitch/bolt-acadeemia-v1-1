@@ -5,7 +5,7 @@ import {
   Menu, X, LogOut, User, Settings, Home, Users, BookOpen, 
   BarChart, Calendar, Bell, FileText, Package, CreditCard,
   Shield, Database, School, UserCheck, GraduationCap, Edit3,
-  MessageSquare
+  MessageSquare, Mail
 } from 'lucide-react';
 import Button from '../ui/Button';
 
@@ -35,7 +35,7 @@ const DashboardLayout: React.FC = () => {
         { icon: <Package size={20} />, label: 'Store Manager', path: '/dashboard/store' },
         { icon: <MessageSquare size={20} />, label: 'Forms Management', path: '/dashboard/forms/demo-requests' },
         { icon: <Edit3 size={20} />, label: 'CMS', path: '/dashboard/cms' },
-        { icon: <FileText size={20} />, label: 'Support Requests', path: '/dashboard/support' },
+        { icon: <Mail size={20} />, label: 'Newsletter', path: '/dashboard/newsletter' },
         { icon: <BarChart size={20} />, label: 'Analytics', path: '/dashboard/analytics' },
         { icon: <Settings size={20} />, label: 'Settings', path: '/dashboard/settings' },
       ];

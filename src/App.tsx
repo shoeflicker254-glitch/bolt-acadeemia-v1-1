@@ -308,6 +308,13 @@ function App() {
               <Route path="support-requests" element={<SupportRequestsManager />} />
             </Route>
             
+            {/* Newsletter Management Route - Super Admin Only */}
+            <Route path="newsletter" element={
+              <ProtectedRoute requiredRole={['super_admin']}>
+                <NewsletterManager />
+              </ProtectedRoute>
+            } />
+            
             {/* CMS Routes - Super Admin Only */}
             <Route path="cms" element={
               <ProtectedRoute requiredRole={['super_admin']}>

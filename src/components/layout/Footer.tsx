@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Instagram, Twitter, Facebook, Linkedin, Youtube } from 'lucide-react';
+import NewsletterForm from '../ui/NewsletterForm';
 
 const Footer: React.FC = () => {
   // Scroll to top when clicking navigation links
@@ -11,7 +12,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           <div>
             <div className="space-y-4">
               <Link to="/" className="flex items-center space-x-2">
@@ -45,6 +46,10 @@ const Footer: React.FC = () => {
                 <Youtube size={20} />
               </a>
             </div>
+          </div>
+
+          <div className="lg:col-span-2">
+            <NewsletterForm />
           </div>
 
           <div>
