@@ -134,6 +134,13 @@ function App() {
             <Route index element={<DashboardHome />} />
             <Route path="profile" element={<ProfilePage />} />
             
+            {/* Newsletter Manager Route for Admin and Super Admin */}
+            <Route path="newsletter" element={
+              <ProtectedRoute requiredRole={['admin', 'super_admin']}>
+                <NewsletterManager />
+              </ProtectedRoute>
+            } />
+
             {/* Super Admin Routes */}
             <Route path="super-admin" element={
               <ProtectedRoute requiredRole={['super_admin']}>
