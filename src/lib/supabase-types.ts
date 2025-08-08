@@ -423,6 +423,44 @@ export interface Database {
           updated_by?: string
         }
       }
+      newsletter_subscriptions: {
+        Row: {
+          id: string
+          email: string
+          name?: string
+          status: 'active' | 'unsubscribed' | 'bounced' | 'complained'
+          subscribed_at: string
+          unsubscribed_at?: string
+          source: string
+          preferences: any
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          email: string
+          name?: string
+          status?: 'active' | 'unsubscribed' | 'bounced' | 'complained'
+          subscribed_at?: string
+          unsubscribed_at?: string
+          source?: string
+          preferences?: any
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          email?: string
+          name?: string
+          status?: 'active' | 'unsubscribed' | 'bounced' | 'complained'
+          subscribed_at?: string
+          unsubscribed_at?: string
+          source?: string
+          preferences?: any
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never

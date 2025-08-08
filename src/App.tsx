@@ -38,6 +38,7 @@ import FormsLayout from './components/dashboard/FormsLayout';
 import DemoRequestsManager from './components/dashboard/DemoRequestsManager';
 import ContactFormsManager from './components/dashboard/ContactFormsManager';
 import SupportRequestsManager from './components/dashboard/SupportRequestsManager';
+import NewsletterManager from './components/dashboard/NewsletterManager';
 
 // Layout component for public pages
 const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -307,13 +308,6 @@ function App() {
               <Route path="contact-forms" element={<ContactFormsManager />} />
               <Route path="support-requests" element={<SupportRequestsManager />} />
             </Route>
-            
-            {/* Newsletter Management Route - Super Admin Only */}
-            <Route path="newsletter" element={
-              <ProtectedRoute requiredRole={['super_admin']}>
-                <NewsletterManager />
-              </ProtectedRoute>
-            } />
             
             {/* CMS Routes - Super Admin Only */}
             <Route path="cms" element={
