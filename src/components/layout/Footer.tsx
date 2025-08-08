@@ -48,9 +48,6 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <NewsletterForm />
-          </div>
 
           <div>
             <h3 className="text-white font-semibold mb-4">Quick Links</h3>
@@ -135,6 +132,10 @@ const Footer: React.FC = () => {
                 <span className="text-gray-400">info@acadeemia.com</span>
               </li>
             </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <NewsletterForm />
           </div>
         </div>
 
