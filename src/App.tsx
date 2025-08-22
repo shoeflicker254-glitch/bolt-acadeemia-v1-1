@@ -26,6 +26,7 @@ import CMSDashboard from './components/cms/CMSDashboard';
 import PagesManager from './components/cms/PagesManager';
 import MediaManager from './components/cms/MediaManager';
 import PricingManager from './components/cms/PricingManager';
+import SectionsManager from './components/cms/SectionsManager';
 import StoreLayout from './components/store/StoreLayout';
 import StoreDashboard from './components/store/StoreDashboard';
 import AddOnsManager from './components/store/AddOnsManager';
@@ -38,7 +39,18 @@ import FormsLayout from './components/dashboard/FormsLayout';
 import DemoRequestsManager from './components/dashboard/DemoRequestsManager';
 import ContactFormsManager from './components/dashboard/ContactFormsManager';
 import SupportRequestsManager from './components/dashboard/SupportRequestsManager';
+import EmailSupportRequestsManager from './components/dashboard/EmailSupportRequestsManager';
 import NewsletterManager from './components/dashboard/NewsletterManager';
+import CRMLayout from './components/crm/CRMLayout';
+import CRMContacts from './components/crm/CRMContacts';
+import CRMCompanies from './components/crm/CRMCompanies';
+import CRMDeals from './components/crm/CRMDeals';
+import CRMActivities from './components/crm/CRMActivities';
+import CRMTasks from './components/crm/CRMTasks';
+import CRMNotes from './components/crm/CRMNotes';
+import CRMPipelines from './components/crm/CRMPipelines';
+import CRMReports from './components/crm/CRMReports';
+import CRMDashboard from './components/crm/CRMDashboard';
 
 // Layout component for public pages
 const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -140,6 +152,27 @@ function App() {
                 <NewsletterManager />
               </ProtectedRoute>
             } />
+
+            {/* Support Requests Route for Admin and Super Admin */}
+            <Route path="support" element={
+              <ProtectedRoute requiredRole={['admin', 'super_admin']}>
+                <SupportRequestsManager />
+              </ProtectedRoute>
+            } />
+
+            {/* CRM Routes */}
+            <Route path="crm" element={<CRMLayout />}>
+              <Route index element={<CRMDashboard />} />
+              <Route path="dashboard" element={<CRMDashboard />} />
+              <Route path="contacts" element={<CRMContacts />} />
+              <Route path="companies" element={<CRMCompanies />} />
+              <Route path="deals" element={<CRMDeals />} />
+              <Route path="activities" element={<CRMActivities />} />
+              <Route path="tasks" element={<CRMTasks />} />
+              <Route path="notes" element={<CRMNotes />} />
+              <Route path="pipelines" element={<CRMPipelines />} />
+              <Route path="reports" element={<CRMReports />} />
+            </Route>
 
             {/* Super Admin Routes */}
             <Route path="super-admin" element={
@@ -314,6 +347,7 @@ function App() {
               <Route path="demo-requests" element={<DemoRequestsManager />} />
               <Route path="contact-forms" element={<ContactFormsManager />} />
               <Route path="support-requests" element={<SupportRequestsManager />} />
+              <Route path="email-support-requests" element={<EmailSupportRequestsManager />} />
             </Route>
             
             {/* CMS Routes - Super Admin Only */}
@@ -327,12 +361,7 @@ function App() {
               <Route path="media" element={<MediaManager />} />
               <Route path="pricing" element={<PricingManager />} />
               <Route path="addons" element={<AddOnsManager />} />
-              <Route path="sections" element={
-                <div className="p-6">
-                  <h1 className="text-2xl font-bold">Sections Management</h1>
-                  <p className="text-gray-600">Manage page sections and layouts.</p>
-                </div>
-              } />
+              <Route path="sections" element={<SectionsManager />} />
               <Route path="content" element={
                 <div className="p-6">
                   <h1 className="text-2xl font-bold">Content Management</h1>

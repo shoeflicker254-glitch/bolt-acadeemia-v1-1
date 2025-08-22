@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import EmailSupportModal from '../components/ui/EmailSupportModal';
+import { supabase } from '../lib/supabase';
 
 // Declare Tawk_API types
 declare global {
@@ -33,10 +34,27 @@ const Support: React.FC = () => {
     description: ''
   });
 
-  const handleTicketSubmit = (e: React.FormEvent) => {
+  const handleTicketSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle ticket submission
-    console.log('Ticket submitted:', ticketForm);
+    // Insert into support_requests table
+    try {
+      const ticketNumber = `SUP-${Date.now()}-${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
+      const { error } = await import('../lib/supabase').then(({ supabase }) =>
+        supabase.from('support_requests').insert({
+          name: ticketForm.name,
+          email: ticketForm.email,
+          topic: ticketForm.subject, // or combine with selectedTicketType if needed
+          message: ticketForm.description
+        })
+      );
+      if (error) throw error;
+      alert('Support ticket submitted successfully!');
+      setTicketForm({ name: '', email: '', subject: '', priority: 'medium', description: '' });
+      setSelectedTicketType('');
+        } catch (error) {
+      alert('Failed to submit support ticket. Please try again.');
+      console.error('Error submitting support ticket:', error);
+    }
   };
 
   const handleStartChat = () => {
