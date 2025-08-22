@@ -17,7 +17,7 @@ interface PricingPlan {
   features: string[];
   highlight: boolean;
   badge?: string;
-  category: 'saas' | 'standalone';
+  plan_type: 'saas' | 'standalone';
   is_highlighted: boolean;
   display_order: number;
   is_active: boolean;
@@ -123,7 +123,7 @@ const PricingManager: React.FC = () => {
     }
   };
 
-  const filteredPlans = plans.filter(plan => plan.category === activeTab);
+  const filteredPlans = plans.filter(plan => plan.plan_type === activeTab);
 
   if (loading) {
     return (
@@ -186,7 +186,7 @@ const PricingManager: React.FC = () => {
               description: '',
               price: 0,
               period: 'term',
-              category: activeTab,
+              plan_type: activeTab,
               highlight: false,
               features: [],
               badge: '',
@@ -212,13 +212,13 @@ const PricingManager: React.FC = () => {
                 <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
                 <p className="text-gray-600 mb-4">{plan.description}</p>
                 <div className="mb-4">
-                  <span className="text-3xl font-bold">{formatPrice(plan.price)}</span>
+                  <span className="text-3xl font-bold">{formatPrice(plan.price_amount)}</span>
                   <span className="text-gray-500 ml-2">per {plan.period}</span>
                 </div>
                 <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                  plan.category === 'saas' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
+                  plan.plan_type === 'saas' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'
                 }`}>
-                  {plan.category.toUpperCase()}
+                  {plan.plan_type.toUpperCase()}
                 </span>
               </div>
 
@@ -338,8 +338,8 @@ const PlanEditModal: React.FC<PlanEditModalProps> = ({ plan, onSave, onCancel })
                   Category
                 </label>
                 <select
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value as 'saas' | 'standalone' })}
+                  value={formData.plan_type}
+                  onChange={(e) => setFormData({ ...formData, plan_type: e.target.value as 'saas' | 'standalone' })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
                   <option value="saas">SaaS</option>

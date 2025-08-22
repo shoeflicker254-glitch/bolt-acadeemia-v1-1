@@ -51,7 +51,6 @@ const AddOnsManager: React.FC = () => {
       const { data, error } = await supabase
         .from('cms_addons')
         .select('*')
-        .eq('is_active', true)
         .order('display_order', { ascending: true });
 
       if (error) throw error;

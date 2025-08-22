@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Layout, Plus, Edit, Trash2, Search, Filter, 
-  Eye, Save, X, FileText, Image, Type
+  Eye, Save, X, FileText, Image, Type, Calendar
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import Card from '../ui/Card';
@@ -42,10 +42,7 @@ const SectionsManager: React.FC = () => {
     try {
       const { data, error } = await supabase
         .from('cms_sections')
-        .select(`
-          *,
-          page:cms_pages(title, slug)
-        `)
+        .select('*')
         .order('display_order', { ascending: true });
 
       if (error) throw error;
