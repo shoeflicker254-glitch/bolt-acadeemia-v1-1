@@ -36,12 +36,23 @@ const SupportRequestsManager: React.FC = () => {
   const fetchSupportRequests = async () => {
     try {
       const { data, error } = await supabase
-        .from('email_support_requests')
+        .from('support_requests')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setSupportRequests(data || []);
+      // Map support_requests fields to expected UI fields
+      setSupportRequests(
+        (data || []).map((row: any) => ({
+          ...row,
+          sender_name: row.name,
+          sender_email: row.email,
+          subject: row.topic,
+          support_type: row.topic,
+          ticket_number: row.id ? row.id.slice(0, 8).toUpperCase() : '',
+          status: 'N/A', // Placeholder since no status in schema
+        }))
+      );
     } catch (error) {
       console.error('Error fetching support requests:', error);
     } finally {
@@ -52,7 +63,7 @@ const SupportRequestsManager: React.FC = () => {
   const handleStatusUpdate = async (id: string, newStatus: SupportRequest['status']) => {
     try {
       const { error } = await supabase
-        .from('email_support_requests')
+        .from('support_requests')
         .update({ status: newStatus })
         .eq('id', id);
 
@@ -70,7 +81,7 @@ const SupportRequestsManager: React.FC = () => {
 
     try {
       const { error } = await supabase
-        .from('email_support_requests')
+        .from('support_requests')
         .delete()
         .eq('id', id);
 

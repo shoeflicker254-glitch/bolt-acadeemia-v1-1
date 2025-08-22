@@ -25,10 +25,16 @@ const FormsLayout: React.FC = () => {
       description: 'View and respond to contact inquiries'
     },
     { 
-      icon: <HelpCircle size={20} />, 
+      icon: <FileText size={20} />, 
       label: 'Support Requests', 
       path: '/dashboard/forms/support-requests',
-      description: 'Handle support tickets and issues'
+      description: 'Support tickets submitted via the website support form'
+    },
+    { 
+      icon: <HelpCircle size={20} />, 
+      label: 'Email Support Requests', 
+      path: '/dashboard/forms/email-support-requests',
+      description: 'Handle support tickets and issues submitted via the email popup form'
     },
   ];
 

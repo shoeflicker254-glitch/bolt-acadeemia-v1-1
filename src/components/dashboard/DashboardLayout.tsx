@@ -36,7 +36,7 @@ const DashboardLayout: React.FC = () => {
         { icon: <Package size={20} />, label: 'Store Manager', path: '/dashboard/store' },
         { icon: <MessageSquare size={20} />, label: 'Forms Management', path: '/dashboard/forms/demo-requests' },
         { icon: <Edit3 size={20} />, label: 'CMS', path: '/dashboard/cms' },
-        { icon: <FileText size={20} />, label: 'Support Requests', path: '/dashboard/support' },
+        { icon: <Users size={20} />, label: 'CRM', path: '/dashboard/crm/dashboard' },
         { icon: <BarChart size={20} />, label: 'Analytics', path: '/dashboard/analytics' },
         { icon: <Settings size={20} />, label: 'Settings', path: '/dashboard/settings' },
       ];
@@ -114,17 +114,47 @@ const DashboardLayout: React.FC = () => {
 
         <nav className="flex-1 px-4 py-6 space-y-2">
           {menuItems.map((item, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                navigate(item.path);
-                setSidebarOpen(false);
-              }}
-              className="w-full flex items-center px-4 py-3 text-left text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <span className="mr-3">{item.icon}</span>
-              {item.label}
-            </button>
+            <div key={index}>
+              {item.submenus ? (
+                <div>
+                  <button
+                    onClick={() => {
+                      navigate(item.path);
+                      setSidebarOpen(false);
+                    }}
+                    className="w-full flex items-center px-4 py-3 text-left text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    <span className="mr-3">{item.icon}</span>
+                    {item.label}
+                  </button>
+                  <div className="ml-8 space-y-1">
+                    {item.submenus.map((submenu, subIdx) => (
+                      <button
+                        key={subIdx}
+                        onClick={() => {
+                          navigate(submenu.path);
+                          setSidebarOpen(false);
+                        }}
+                        className="w-full flex items-center px-4 py-2 text-left text-gray-600 rounded-lg hover:bg-gray-100 transition-colors text-sm"
+                      >
+                        {submenu.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    navigate(item.path);
+                    setSidebarOpen(false);
+                  }}
+                  className="w-full flex items-center px-4 py-3 text-left text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <span className="mr-3">{item.icon}</span>
+                  {item.label}
+                </button>
+              )}
+            </div>
           ))}
         </nav>
 
