@@ -39,14 +39,12 @@ const Support: React.FC = () => {
     // Insert into support_requests table
     try {
       const ticketNumber = `SUP-${Date.now()}-${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
-      const { error } = await import('../lib/supabase').then(({ supabase }) =>
-        supabase.from('support_requests').insert({
-          name: ticketForm.name,
-          email: ticketForm.email,
-          topic: ticketForm.subject, // or combine with selectedTicketType if needed
-          message: ticketForm.description
-        })
-      );
+      const { error } = await supabase.from('support_requests').insert({
+        name: ticketForm.name,
+        email: ticketForm.email,
+        topic: ticketForm.subject, // or combine with selectedTicketType if needed
+        message: ticketForm.description
+      });
       if (error) throw error;
       alert('Support ticket submitted successfully!');
       setTicketForm({ name: '', email: '', subject: '', priority: 'medium', description: '' });
