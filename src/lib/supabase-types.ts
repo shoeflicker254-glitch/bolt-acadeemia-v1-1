@@ -461,6 +461,50 @@ export interface Database {
           updated_at?: string
         }
       }
+      payments: {
+        Row: {
+          id: string
+          order_id: string
+          school_id: string
+          amount: number
+          currency: string
+          payment_method: string
+          pesapal_tracking_id?: string
+          pesapal_transaction_id?: string
+          status: string
+          description?: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          order_id: string
+          school_id: string
+          amount: number
+          currency?: string
+          payment_method: string
+          pesapal_tracking_id?: string
+          pesapal_transaction_id?: string
+          status?: string
+          description?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          order_id?: string
+          school_id?: string
+          amount?: number
+          currency?: string
+          payment_method?: string
+          pesapal_tracking_id?: string
+          pesapal_transaction_id?: string
+          status?: string
+          description?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never

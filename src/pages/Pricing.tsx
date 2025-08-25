@@ -6,6 +6,8 @@ import {
 import Button from '../components/ui/Button';
 import PricingCard from '../components/ui/PricingCard';
 import CurrencySwitcher from '../components/ui/CurrencySwitcher';
+import SchoolRegistrationModal from '../components/ui/SchoolRegistrationModal';
+import PaymentModal from '../components/ui/PaymentModal';
 import { useCurrency } from '../contexts/CurrencyContext';
 
 const Pricing: React.FC = () => {
@@ -14,6 +16,10 @@ const Pricing: React.FC = () => {
   const { formatPrice } = useCurrency();
   const [billingPeriod, setBillingPeriod] = useState<'termly' | 'annual'>('annual');
   const [showAddOns, setShowAddOns] = useState(true);
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<any>(null);
+  const [registrationData, setRegistrationData] = useState<any>(null);
   
   const handleBillingPeriodChange = (period: 'termly' | 'annual') => {
     setBillingPeriod(period);
@@ -37,6 +43,29 @@ const Pricing: React.FC = () => {
         selectedAddon: addonName,
         price: price,
         fromPricing: true 
+      } 
+    });
+  };
+
+  const handlePlanSelect = (plan: any) => {
+    setSelectedPlan(plan);
+    setShowRegistrationModal(true);
+  };
+
+  const handleRegistrationComplete = (data: any) => {
+    setRegistrationData(data);
+    setShowRegistrationModal(false);
+    setShowPaymentModal(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    setShowPaymentModal(false);
+    setSelectedPlan(null);
+    setRegistrationData(null);
+    // Redirect to success page or dashboard
+    navigate('/dashboard', { 
+      state: { 
+        message: 'Registration and payment completed successfully!' 
       } 
     });
   };
@@ -440,7 +469,11 @@ const Pricing: React.FC = () => {
                 highlight={plan.highlight}
                 badge={plan.badge}
                 buttonText="Subscribe Now"
-                onButtonClick={handleContactSales}
+                onButtonClick={() => handlePlanSelect({
+                  ...plan,
+                  price: getPrice(plan.termlyPrice),
+                  period: billingPeriod === 'annual' ? 'term (billed annually)' : 'term'
+                })}
               />
             ))}
           </div>
@@ -502,7 +535,11 @@ const Pricing: React.FC = () => {
                 highlight={plan.highlight}
                 badge={plan.badge}
                 buttonText="Contact Sales"
-                onButtonClick={handleContactSales}
+                onButtonClick={() => handlePlanSelect({
+                  ...plan,
+                  price: formatPrice(plan.termlyPrice),
+                  period: plan.period
+                })}
               />
             ))}
           </div>
@@ -745,6 +782,22 @@ const Pricing: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Registration Modal */}
+      <SchoolRegistrationModal
+        isOpen={showRegistrationModal}
+        onClose={() => setShowRegistrationModal(false)}
+        selectedPlan={selectedPlan}
+        onRegistrationComplete={handleRegistrationComplete}
+      />
+
+      {/* Payment Modal */}
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        registrationData={registrationData}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
     </div>
   );
 };

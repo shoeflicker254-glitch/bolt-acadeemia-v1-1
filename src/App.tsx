@@ -35,6 +35,7 @@ import StoreAnalytics from './components/store/StoreAnalytics';
 import TawkChat from './components/ui/TawkChat';
 import CookieConsent from './components/ui/CookieConsent';
 import PWAInstallPrompt from './components/ui/PWAInstallPrompt';
+import PaymentSuccessPage from './components/ui/PaymentSuccessPage';
 import FormsLayout from './components/dashboard/FormsLayout';
 import DemoRequestsManager from './components/dashboard/DemoRequestsManager';
 import ContactFormsManager from './components/dashboard/ContactFormsManager';
@@ -136,6 +137,8 @@ function App() {
 
           {/* Auth Routes */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+          <Route path="/payment/callback" element={<PaymentSuccessPage />} />
 
           {/* Protected Dashboard Routes */}
           <Route path="/dashboard" element={

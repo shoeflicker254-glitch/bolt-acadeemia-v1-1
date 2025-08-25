@@ -7,6 +7,7 @@ import {
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import CurrencySwitcher from '../components/ui/CurrencySwitcher';
+import PaymentModal from '../components/ui/PaymentModal';
 import { useCurrency } from '../contexts/CurrencyContext';
 
 interface AddOn {
@@ -33,6 +34,8 @@ const Store: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [checkoutData, setCheckoutData] = useState<any>(null);
 
   const addOns: AddOn[] = [
     // SaaS Add-ons
@@ -317,6 +320,20 @@ const Store: React.FC = () => {
     setShowCheckout(true);
   };
 
+  const handlePaymentFromCheckout = (orderData: any) => {
+    setCheckoutData(orderData);
+    setShowCheckout(false);
+    setShowPaymentModal(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    setShowPaymentModal(false);
+    setCheckoutData(null);
+    setCart([]);
+    // Show success message or redirect
+    alert('Payment completed successfully!');
+  };
+
   return (
     <div className="pt-20 animate-fade-in">
       {/* Hero Section */}
@@ -571,13 +588,17 @@ const Store: React.FC = () => {
           cart={cart}
           total={getTotalPrice()}
           onClose={() => setShowCheckout(false)}
-          onSuccess={() => {
-            setCart([]);
-            setShowCheckout(false);
-            setShowCart(false);
-          }}
+          onSuccess={handlePaymentFromCheckout}
         />
       )}
+
+      {/* Payment Modal */}
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        registrationData={checkoutData}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
     </div>
   );
 };
@@ -587,11 +608,11 @@ interface CheckoutModalProps {
   cart: CartItem[];
   total: number;
   onClose: () => void;
-  onSuccess: () => void;
+  onSuccess: (orderData: any) => void;
 }
 
 const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, total, onClose, onSuccess }) => {
-  const [step, setStep] = useState<'details' | 'payment' | 'success'>('details');
+  const [step, setStep] = useState<'details' | 'review'>('details');
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -601,7 +622,6 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, total, onClose, onS
     billingAddress: '',
     city: '',
     country: 'Kenya',
-    paymentMethod: 'mpesa'
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -611,18 +631,29 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, total, onClose, onS
 
   const handleSubmitDetails = (e: React.FormEvent) => {
     e.preventDefault();
-    setStep('payment');
+    setStep('review');
   };
 
-  const handlePayment = () => {
-    // Simulate payment processing
-    setTimeout(() => {
-      setStep('success');
-    }, 2000);
-  };
-
-  const handleSuccess = () => {
-    onSuccess();
+  const handleProceedToPayment = () => {
+    // Prepare order data for payment
+    const orderData = {
+      adminFirstName: formData.firstName,
+      adminLastName: formData.lastName,
+      adminEmail: formData.email,
+      adminPhone: formData.phone,
+      schoolName: formData.institution,
+      schoolAddress: formData.billingAddress,
+      schoolPhone: formData.phone,
+      schoolEmail: formData.email,
+      selectedPlan: {
+        title: 'Store Purchase',
+        description: `${cart.length} add-on${cart.length > 1 ? 's' : ''}`,
+        price: `KES ${total.toLocaleString()}`,
+        period: 'one-time',
+        items: cart
+      }
+    };
+    onSuccess(orderData);
   };
 
   return (
@@ -633,8 +664,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, total, onClose, onS
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">
               {step === 'details' && 'Billing Details'}
-              {step === 'payment' && 'Payment'}
-              {step === 'success' && 'Order Complete'}
+              {step === 'review' && 'Review Order'}
             </h2>
             <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
               <X size={24} />
@@ -783,51 +813,36 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, total, onClose, onS
             </form>
           )}
 
-          {step === 'payment' && (
+          {step === 'review' && (
             <div className="space-y-6">
+              {/* Order Summary */}
               <div>
-                <h3 className="font-semibold mb-4">Select Payment Method</h3>
-                <div className="space-y-3">
-                  <label className="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="mpesa"
-                      checked={formData.paymentMethod === 'mpesa'}
-                      onChange={handleInputChange}
-                      className="mr-3"
-                    />
-                    <span>M-Pesa</span>
-                  </label>
-                  <label className="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="card"
-                      checked={formData.paymentMethod === 'card'}
-                      onChange={handleInputChange}
-                      className="mr-3"
-                    />
-                    <span>Credit/Debit Card</span>
-                  </label>
-                  <label className="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="bank"
-                      checked={formData.paymentMethod === 'bank'}
-                      onChange={handleInputChange}
-                      className="mr-3"
-                    />
-                    <span>Bank Transfer</span>
-                  </label>
+                <h3 className="font-semibold mb-4">Order Summary</h3>
+                <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+                  {cart.map((item) => (
+                    <div key={item.id} className="flex justify-between">
+                      <span>{item.name} × {item.quantity}</span>
+                      <span>KES {(item.price * item.quantity).toLocaleString()}</span>
+                    </div>
+                  ))}
+                  <div className="border-t pt-2 flex justify-between font-semibold">
+                    <span>Total</span>
+                    <span>KES {total.toLocaleString()}</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex justify-between font-semibold text-lg">
-                  <span>Total Amount</span>
-                  <span>KES {total.toLocaleString()}</span>
+              {/* Billing Information */}
+              <div>
+                <h3 className="font-semibold mb-4">Billing Information</h3>
+                <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+                  <p><span className="font-medium">Name:</span> {formData.firstName} {formData.lastName}</p>
+                  <p><span className="font-medium">Email:</span> {formData.email}</p>
+                  <p><span className="font-medium">Phone:</span> {formData.phone}</p>
+                  <p><span className="font-medium">Institution:</span> {formData.institution}</p>
+                  <p><span className="font-medium">Address:</span> {formData.billingAddress}</p>
+                  <p><span className="font-medium">City:</span> {formData.city}</p>
+                  <p><span className="font-medium">Country:</span> {formData.country}</p>
                 </div>
               </div>
 
@@ -835,25 +850,10 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, total, onClose, onS
                 <Button variant="outline" onClick={() => setStep('details')} className="flex-1">
                   Back
                 </Button>
-                <Button variant="primary" onClick={handlePayment} className="flex-1">
-                  Pay Now
+                <Button variant="primary" onClick={handleProceedToPayment} className="flex-1">
+                  Proceed to Payment
                 </Button>
               </div>
-            </div>
-          )}
-
-          {step === 'success' && (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check size={32} className="text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Order Successful!</h3>
-              <p className="text-gray-600 mb-6">
-                Thank you for your purchase. You will receive an email confirmation shortly.
-              </p>
-              <Button variant="primary" onClick={handleSuccess}>
-                Continue Shopping
-              </Button>
             </div>
           )}
         </div>
